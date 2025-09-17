@@ -1,15 +1,76 @@
-// Enable tap-to-open dropdown on touch devices
-document.querySelectorAll('nav .dropdown > a').forEach(link => {
-  link.addEventListener('click', e => {
-    if (window.matchMedia('(hover: none)').matches) {
+// ===== 1) Tap-to-open dropdown on touch devices =====
+(function () {
+  const isTouch = window.matchMedia('(hover: none)').matches;
+  const dropdownLinks = document.querySelectorAll('nav .dropdown > a');
+
+  dropdownLinks.forEach(link => {
+    link.addEventListener('click', (e) => {
+      if (!isTouch) return; // desktop uses :hover in CSS
       e.preventDefault();
+
+      // close other open dropdowns
+      document.querySelectorAll('nav .dropdown.open').forEach(d => {
+        if (d !== link.parentElement) d.classList.remove('open');
+      });
+
+      // toggle this one
       link.parentElement.classList.toggle('open');
-    }
-    document.body.addEventListener("pointermove", (e)=>{
-  const { currentTarget: el, clientX: x, clientY: y } = e;
-  const { top: t, left: l, width: w, height: h } = el.getBoundingClientRect();
-  el.style.setProperty('--posX',  x-l-w/2);
-  el.style.setProperty('--posY',  y-t-h/2);
-})
+    });
   });
-});
+
+  // close on outside tap/click
+  document.addEventListener('click', (e) => {
+    if (!isTouch) return;
+    const anyOpen = document.querySelector('nav .dropdown.open');
+    if (!anyOpen) return;
+    if (!anyOpen.contains(e.target)) anyOpen.classList.remove('open');
+  });
+
+  // close on Esc
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape') {
+      document.querySelectorAll('nav .dropdown.open')
+        .forEach(d => d.classList.remove('open'));
+    }
+  });
+})();
+
+// ===== 2) Pointer tracking for CSS vars (for parallax/glow/whatever) =====
+// Choose where to write the vars:
+// - element-scoped (recommended): the hero banner gets its own --posX/--posY
+// - root-scoped: write to :root so any component can read them
+(function () {
+  const target = document.querySelector('.hero-banner') || document.documentElement;
+
+  let rect = target.getBoundingClientRect();
+  let px = 0, py = 0;
+  let ticking = false;
+
+  function onPointerMove(ev) {
+    // relative to the target's center:
+    const x = ev.clientX - rect.left - rect.width / 2;
+    const y = ev.clientY - rect.top  - rect.height / 2;
+    px = x;
+    py = y;
+
+    if (!ticking) {
+      window.requestAnimationFrame(applyVars);
+      ticking = true;
+    }
+  }
+
+  function applyVars() {
+    // write CSS variables; read them in CSS as var(--posX) / var(--posY)
+    target.style.setProperty('--posX', px.toFixed(1));
+    target.style.setProperty('--posY', py.toFixed(1));
+    ticking = false;
+  }
+
+  function onResize() {
+    rect = target.getBoundingClientRect();
+  }
+
+  window.addEventListener('pointermove', onPointerMove, { passive: true });
+  window.addEventListener('resize', onResize);
+  window.addEventListener('orientationchange', onResize);
+})();
