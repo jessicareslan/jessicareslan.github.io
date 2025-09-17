@@ -37,13 +37,34 @@
     </nav>
   </header>
 
-  <!-- Hero with background image + text overlay -->
-  <section class="hero-banner">
-    <div class="overlay">
-      <h1>Latest</h1>
-      <a href="#latest" class="btn">Explore Latest</a>
-    </div>
-  </section>
+<div class="latest-circle">
+  <svg viewBox="0 0 200 200" width="160" height="160">
+    <defs>
+      <path id="circlePath" d="M100,100 m-75,0 a75,75 0 1,1 150,0 a75,75 0 1,1 -150,0"/>
+    </defs>
+    <text font-size="14" letter-spacing="3" fill="#fff">
+      <textPath href="#circlePath">
+        LATEST • LATEST • LATEST • LATEST • LATEST •
+      </textPath>
+    </text>
+  </svg>
+</div>
+
+<style>
+.latest-circle svg {
+  animation: spin 10s linear infinite;
+}
+
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+
+.latest-circle {
+  display: inline-block;
+  color: #fff;
+}
+</style>
+
 
 
   <!-- Footer -->
