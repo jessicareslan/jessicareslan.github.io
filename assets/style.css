@@ -98,7 +98,7 @@ nav a:hover{ color:var(--pink); }
 
 /* Sparkling text effect */
 .sparkle{
-  font-family:'Bitcount Grid Double', sans-serif;
+  font-family:'Emilys Candy', sans-serif;
   font-size: clamp(2.6rem, 7vw, 5rem);
   font-weight:700;
   text-transform:uppercase;
