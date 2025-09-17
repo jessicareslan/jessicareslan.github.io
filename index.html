@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Funky Earth — Sleek & chic environmental blog</title>
+  <meta name="description" content="Funky Earth: thoughtful writing on environmental issues, plus recipes, photography, video, poetry, and opinions." />
+
+  <!-- Google Fonts (logo + nav).
+       Note: 'Asimovian' isn't a Google font; using 'Gupter' for nav here. -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Bitcount+Grid+Double:wght@100..900&family=Gupter:wght@400;700&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="assets/style.css" />
+</head>
+<body>
+
+  <!-- Header -->
+  <header>
+    <a href="./" class="logo" aria-label="Funky Earth home">
+      <span class="logo-text">Funky Earth</span>
+    </a>
+    <nav aria-label="Primary">
+      <div class="dropdown">
+        <a href="#articles">Articles ▾</a>
+        <div class="dropdown-content">
+          <a href="#environment">Environment</a>
+          <a href="#recipes">Recipes</a>
+          <a href="#photography">Photography</a>
+          <a href="#poetry">Poetry</a>
+          <a href="#opinions">Opinions</a>
+        </div>
+      </div>
+      <a href="#photography">Photography</a>
+      <a href="#opinions">Opinions</a>
+      <a href="#about">About</a>
+    </nav>
+  </header>
+
+  <!-- Hero with background image + text overlay -->
+  <section class="hero-banner">
+    <div class="overlay">
+      <h1>Welcome to Funky Earth</h1>
+      <p>Sleek & chic stories about the planet — and the people on it.</p>
+      <a href="#latest" class="btn">Explore Latest</a>
+    </div>
+  </section>
+
+  <!-- Latest -->
+  <main id="latest" class="wrap">
+    <h2>Latest</h2>
+    <div class="grid">
+      <article class="card post" id="articles" data-cat="environment">
+        <img class="thumb" src="assets/images/sample-1.jpg" alt="River valley">
+        <div class="card-body">
+          <span class="tag"><i></i> Environment</span>
+          <h3>PFAS, plastics, and the kitchen sink</h3>
+          <p class="muted">What we know, what we don’t, and simple ways to lower exposure without panic.</p>
+        </div>
+      </article>
+      <article class="card post" data-cat="recipes" id="recipes">
+        <img class="thumb" src="assets/images/sample-2.jpg" alt="Salad bowl">
+        <div class="card-body">
+          <span class="tag"><i></i> Recipe</span>
+          <h3>Sunshine herby salad with citrus tahini</h3>
+          <p class="muted">A 10-minute bowl with pantry staples. Zingy, lush, weeknight-friendly.</p>
+        </div>
+      </article>
+      <article class="card post" data-cat="opinions" id="opinions">
+        <img class="thumb" src="assets/images/sample-3.jpg" alt="Newspaper">
+        <div class="card-body">
+          <span class="tag"><i></i> Opinion</span>
+          <h3>Recycling isn’t broken—our incentives are</h3>
+          <p class="muted">Pay for outcomes, not tonnage, and the myths start to melt.</p>
+        </div>
+      </article>
+    </div>
+  </main>
+
+  <!-- Footer -->
+  <footer>
+    <div class="wrap foot">
+      <div class="brand">
+        <span class="logo-text">Funky Earth</span>
+        <p class="muted">Sleek & chic stories on the planet — and the people on it.</p>
+      </div>
+      <nav class="muted" aria-label="Footer">
+        <a href="#latest">Latest</a> · <a href="#about">About</a>
+      </nav>
+      <p class="muted">hello@funkyearth.com</p>
+    </div>
+  </footer>
+
+  <script src="assets/script.js"></script>
+</body>
+</html>
