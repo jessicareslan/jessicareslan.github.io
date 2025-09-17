@@ -37,26 +37,47 @@
     </nav>
   </header>
 
-  <!-- Hero section -->
-<section class="hero-banner">
-  <div class="overlay">
-    <h1 class="sparkle">LATEST</h1>
-  </div>
-</section>
-
+ <!-- Latest spinning circle -->
 <div class="latest-circle">
-  <svg viewBox="0 0 200 200" width="160" height="160">
+  <svg viewBox="0 0 200 200" width="160" height="160" aria-hidden="true">
     <defs>
       <path id="circlePath" d="M100,100 m-75,0 a75,75 0 1,1 150,0 a75,75 0 1,1 -150,0"/>
     </defs>
-    <text font-size="14" letter-spacing="3" fill="#fff">
-      <textPath href="#circlePath">
+    <text font-size="16" class="ring-text">
+      <textPath href="#circlePath" startOffset="0%">
         LATEST • LATEST • LATEST • LATEST • LATEST •
       </textPath>
     </text>
   </svg>
 </div>
 
+<style>
+.latest-circle {
+  display: inline-block;
+  animation: spin 12s linear infinite; /* rotates the whole circle */
+}
+
+/* Animate the text color */
+.ring-text {
+  font-family: 'Bitcount Grid Double', sans-serif;
+  font-weight: 600;
+  fill: #fff;
+  animation: colorCycle 6s linear infinite;
+}
+
+/* Rotation */
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+
+/* Color cycling through white → pink → teal → white */
+@keyframes colorCycle {
+  0%   { fill: #ffffff; }
+  33%  { fill: #D10072; } /* deep pink */
+  66%  { fill: #00c4b4; } /* teal accent */
+  100% { fill: #ffffff; }
+}
+</style>
 <style>
 .latest-circle svg {
   animation: spin 10s linear infinite;
