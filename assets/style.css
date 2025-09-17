@@ -1,24 +1,50 @@
-/* Base */
+/* ========== Base ==========
+   Color vars + layout
+*/
 :root{
   --ink:#0f1013;
-  --bg:#000;
-  --white:#fff;
+  --bg:#000000;
+  --white:#ffffff;
   --pink:#D10072;
   --muted:#a0a6af;
   --max:1180px;
+
+  /* pointer vars default (used by the animated bg) */
+  --posX: 0;
+  --posY: 0;
 }
 *{ box-sizing:border-box; }
 html, body{ margin:0; }
+
+/* ONE body rule: solid fallback + animated gradient */
 body{
-  background:#0c0d10;
+  min-height:100vh;
+  /* nicer viewport on mobile browsers that hide URL bar */
+  min-height:100svh;
   color:var(--white);
+  background-color:#0c0d10; /* fallback if gradients unsupported */
   font-family: system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, sans-serif;
   line-height:1.5;
+
+  /* map JS-provided pointer vars to px */
+  --x: calc(var(--posX) * 1px);
+  --y: calc(var(--posY) * 1px);
+
+  /* interactive cosmic background */
+  background-image:
+    linear-gradient(115deg, rgb(211 255 215), rgb(0 0 0)),
+    radial-gradient( 90% 100% at calc(50% + var(--x)) calc(0% + var(--y)),  rgb(200 200 200), rgb(22 0 45)),
+    radial-gradient(100% 100% at calc(80% - var(--x)) calc(0% - var(--y)),   rgb(250 255 0),   rgb(36 0 0)),
+    radial-gradient(150% 210% at calc(100% + var(--x)) calc(0% + var(--y)),  rgb(20 175 125),  rgb(0 10 255)),
+    radial-gradient(100% 100% at calc(100% - var(--x)) calc(30% - var(--y)), rgb(255 77 0),    rgb(0 200 255)),
+    linear-gradient(60deg, rgb(255 0 0), rgb(120 86 255));
+  background-blend-mode: overlay, overlay, difference, difference, difference, normal;
 }
-a{ color:inherit; text-decoration:none; }
+
+/* wrapper width helper */
 .wrap{ max-width:var(--max); margin:0 auto; padding:0 22px; }
 
-/* Header */
+/* ========== Header ========== */
 header{
   padding:16px 22px;
   display:flex;
@@ -29,7 +55,7 @@ header{
   position:sticky;
   top:0;
   z-index:1000;
-  overflow:visible; /* allows dropdown to show outside header */
+  overflow:visible; /* allows dropdown to overflow */
 }
 .logo,
 .logo:link,
@@ -60,7 +86,7 @@ nav a{
 }
 nav a:hover{ color:var(--pink); }
 
-/* Dropdown */
+/* ========== Dropdown ========== */
 .dropdown{ position:relative; }
 .dropdown > a{ display:inline-flex; align-items:center; gap:6px; }
 .dropdown-content{
@@ -83,39 +109,25 @@ nav a:hover{ color:var(--pink); }
   background:var(--pink);
   color:#fff;
 }
-/* Show on hover (desktop) + when toggled open (mobile JS can add .open) */
+/* show on hover (desktop) and when .open is toggled (mobile via JS) */
 .dropdown:hover .dropdown-content,
 .dropdown.open .dropdown-content{ display:block; }
 
-body{
-  height:100vh;
-  margin: 0;
-  --x: calc(var(--posX, 0) * 1px);
-  --y: calc(var(--posY, 0) * 1px);
-  background-image: 
-    linear-gradient(115deg, rgb(211 255 215), rgb(0 0 0)), 
-    radial-gradient( 90% 100% at calc( 50% + var(--x)) calc( 0% + var(--y)), rgb(200 200 200), rgb(022 000 045)), 
-    radial-gradient(100% 100% at calc( 80% - var(--x)) calc( 0% - var(--y)), rgb(250 255 000), rgb(036 000 000)), 
-    radial-gradient(150% 210% at calc(100% + var(--x)) calc( 0% + var(--y)), rgb(020 175 125), rgb(000 010 255)), 
-    radial-gradient(100% 100% at calc(100% - var(--x)) calc(30% - var(--y)), rgb(255 077 000), rgb(000 200 255)), 
-    linear-gradient(60deg, rgb(255 000 000), rgb(120 086 255));
-  background-blend-mode: overlay, overlay, difference, difference, difference, normal;
+/* ========== “LATEST” circle corner placement ========== */
+.latest-circle-wrap{
+  position:absolute;   /* place in a corner over hero or page */
+  z-index:3;
+  pointer-events:none; /* badge is decorative; remove if links inside */
 }
+.latest-circle-wrap.top-left    { top:20px; left:20px; }
+.latest-circle-wrap.top-right   { top:20px; right:20px; }
+.latest-circle-wrap.bottom-left { bottom:20px; left:20px; }
+.latest-circle-wrap.bottom-right{ bottom:20px; right:20px; }
 
-.latest-circle-wrap {
-  position: absolute;   /* allows corner placement */
-  z-index: 3;
-}
-
-.latest-circle-wrap.top-left    { top: 20px; left: 20px; }
-.latest-circle-wrap.top-right   { top: 20px; right: 20px; }
-.latest-circle-wrap.bottom-left { bottom: 20px; left: 20px; }
-.latest-circle-wrap.bottom-right{ bottom: 20px; right: 20px; }
-
-/* Sparkling text effect */
+/* ========== Sparkling text style (if used) ========== */
 .sparkle{
   font-family:'Emilys Candy', sans-serif;
-  font-size: clamp(2.6rem, 7vw, 5rem);
+  font-size:clamp(2.6rem, 7vw, 5rem);
   font-weight:700;
   text-transform:uppercase;
   background: linear-gradient(90deg, #fff, var(--pink), #fff);
@@ -125,7 +137,19 @@ body{
   animation: shine 3s linear infinite;
 }
 @keyframes shine{
-  0%   { background-position:200% center; }
-  100% { background-position:0% center; }
+  0% { background-position:200% center; }
+  100%{ background-position:0% center; }
 }
 
+/* ========== Responsive helpers ========== */
+@media (max-width:980px){
+  .foot{ display:grid; grid-template-columns:1fr; }
+}
+@media (max-width:640px){
+  nav{ gap:14px; }
+}
+
+/* ========== Reduced motion ========== */
+@media (prefers-reduced-motion: reduce){
+  .sparkle, .logo-text, nav a { animation:none; transition:none; }
+}
