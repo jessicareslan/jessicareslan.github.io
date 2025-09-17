@@ -96,6 +96,16 @@ nav a:hover{ color:var(--pink); }
 
 .hero-banner .overlay { position: relative; z-index: 2; }
 
+.latest-circle-wrap {
+  position: absolute;   /* allows corner placement */
+  z-index: 3;
+}
+
+.latest-circle-wrap.top-left    { top: 20px; left: 20px; }
+.latest-circle-wrap.top-right   { top: 20px; right: 20px; }
+.latest-circle-wrap.bottom-left { bottom: 20px; left: 20px; }
+.latest-circle-wrap.bottom-right{ bottom: 20px; right: 20px; }
+
 /* Sparkling text effect */
 .sparkle{
   font-family:'Emilys Candy', sans-serif;
