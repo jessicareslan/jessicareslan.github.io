@@ -46,11 +46,30 @@
     @keyframes latest-color {
       0%   { fill: #ffffff; }
       33%  { fill: #D10072; } /* deep pink */
-      66%  { fill: #00c4b4; } /* teal */
+      66%  { fill: #9966CC; } /* teal */
       100% { fill: #ffffff; }
     }
   </style>
 </head>
+
+  <!-- Hero Section with background -->
+<section class="hero-banner">
+  <div class="overlay">
+    <!-- Put your spinning circle here -->
+    <div class="latest-circle" aria-hidden="true">
+      <svg viewBox="0 0 200 200" width="160" height="160">
+        <defs>
+          <path id="latest-circle-path" d="M100,100 m-75,0 a75,75 0 1,1 150,0 a75,75 0 1,1 -150,0" />
+        </defs>
+        <text font-size="16" class="ring-text" letter-spacing="3">
+          <textPath href="#latest-circle-path" startOffset="0%">
+            LATEST • LATEST • LATEST • LATEST • LATEST •
+          </textPath>
+        </text>
+      </svg>
+    </div>
+  </div>
+</section>
 <body>
 
   <!-- Header -->
