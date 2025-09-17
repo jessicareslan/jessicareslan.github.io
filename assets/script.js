@@ -1,3 +1,21 @@
+// Write CSS vars relative to the viewport center
+(() => {
+  let px = 0, py = 0, ticking = false;
+  const root = document.documentElement;
+  function apply() {
+    root.style.setProperty('--posX', px.toFixed(1));
+    root.style.setProperty('--posY', py.toFixed(1));
+    ticking = false;
+  }
+  function onMove(e){
+    const x = e.clientX - window.innerWidth/2;
+    const y = e.clientY - window.innerHeight/2;
+    px = x; py = y;
+    if (!ticking){ requestAnimationFrame(apply); ticking = true; }
+  }
+  window.addEventListener('pointermove', onMove, { passive:true });
+  window.addEventListener('resize', () => { /* nothing needed; vars stay relative */ });
+})();
 // ===== 1) Tap-to-open dropdown on touch devices =====
 (function () {
   const isTouch = window.matchMedia('(hover: none)').matches;
