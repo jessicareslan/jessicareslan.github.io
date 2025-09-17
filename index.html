@@ -63,6 +63,138 @@
     <!-- your content cards go here -->
   </main>
 
+  <!-- Newsletter heart badge -->
+<section class="newsletter-wrap">
+  <h2 class="visually-hidden">Join weekly newsletter</h2>
+
+  <button class="heart-circle" type="button" aria-label="Join weekly newsletter">
+    <span class="circle-label">Join weekly newsletter</span>
+    <span class="heart" aria-hidden="true">❤</span>
+
+    <!-- burst particles -->
+    <span class="burst">
+      <i style="--i:0"></i><i style="--i:1"></i><i style="--i:2"></i><i style="--i:3"></i>
+      <i style="--i:4"></i><i style="--i:5"></i><i style="--i:6"></i><i style="--i:7"></i>
+    </span>
+  </button>
+</section>
+
+<style>
+/* layout */
+.newsletter-wrap{
+  display:grid; place-items:center; padding:40px 20px;
+}
+
+/* circular button */
+.heart-circle{
+  --size: 160px;
+  --bg: rgba(0,0,0,.5);
+  --txt: #fff;
+  --neon: #FF10F0; /* neon pink */
+  position: relative;
+  width: var(--size); height: var(--size);
+  border: 2px solid var(--txt);
+  border-radius: 50%;
+  background: var(--bg);
+  color: var(--txt);
+  cursor: pointer;
+  outline: none;
+  display:grid; place-items:center;
+  transition: transform .2s ease, box-shadow .2s ease, border-color .2s ease;
+  box-shadow: 0 0 0 transparent;
+}
+
+/* glowing ring on hover/focus */
+.heart-circle:hover,
+.heart-circle:focus-visible{
+  border-color: var(--neon);
+  box-shadow: 0 0 28px var(--neon);
+}
+
+/* circular label around ring */
+.circle-label{
+  position:absolute; inset:0; display:grid; place-items:center;
+  font: 600 12px/1.2 'Emilys Candy', system-ui, sans-serif;
+  color: #eaeaea;
+  text-align:center;
+  width: 85%; height: 85%;
+  border-radius:50%;
+  pointer-events:none;
+}
+
+/* heart in center */
+.heart{
+  font-size: 44px;
+  filter: drop-shadow(0 0 8px rgba(255,16,240,.6));
+  transition: transform .25s ease, opacity .25s ease;
+}
+
+/* the burst container */
+.burst{
+  position:absolute; left:50%; top:50%;
+  width:0; height:0; pointer-events:none;
+}
+
+/* individual particles (mini hearts) */
+.burst i{
+  --count: 8;               /* how many particles */
+  --dist: 70px;             /* how far they travel */
+  --angle: calc(var(--i) * (360deg / var(--count)));
+  position:absolute; left:-6px; top:-6px; /* centered seed */
+  width:12px; height:12px; transform: rotate(var(--angle)) translateY(0);
+  background: var(--neon);
+  clip-path: path("M6 10 C4 8, 0 7, 0 4 C0 2, 2 0, 4 0 C5 0, 6 1, 6 1 C6 1, 7 0, 8 0 C10 0, 12 2, 12 4 C12 7, 8 8, 6 10 Z");
+  opacity:0;
+}
+
+/* explode on hover/focus */
+.heart-circle:hover .heart,
+.heart-circle:focus-visible .heart{
+  transform: scale(.6);
+  opacity:.7;
+}
+.heart-circle:hover .burst i,
+.heart-circle:focus-visible .burst i{
+  animation: burst 700ms cubic-bezier(.16,.63,.25,1) forwards;
+  animation-delay: calc(var(--i) * 25ms);
+}
+
+@keyframes burst{
+  0%   { transform: rotate(var(--angle)) translateY(0) scale(.6); opacity: 0; }
+  60%  { opacity: 1; }
+  100% { transform: rotate(var(--angle)) translateY(var(--dist)) scale(1.1); opacity: 0; }
+}
+
+/* keyboard focus ring */
+.heart-circle:focus-visible{ outline: 2px solid #fff; outline-offset: 4px; }
+
+/* reduced motion */
+@media (prefers-reduced-motion: reduce){
+  .heart-circle,
+  .heart,
+  .burst i{ transition: none; animation: none !important; }
+}
+
+/* helper for a11y-only heading */
+.visually-hidden{
+  position:absolute!important; height:1px; width:1px; overflow:hidden;
+  clip:rect(1px,1px,1px,1px); white-space:nowrap; border:0; padding:0; margin:-1px;
+}
+</style>
+
+<script>
+/* Optional: allow re-trigger on tap (mobile) by toggling a class briefly */
+document.querySelectorAll('.heart-circle').forEach(btn=>{
+  btn.addEventListener('click', ()=>{
+    btn.classList.remove('replay');
+    // force reflow so animation restarts
+    void btn.offsetWidth;
+    btn.classList.add('replay');
+    setTimeout(()=>btn.classList.remove('replay'), 800);
+  });
+});
+</script>
+
   <footer>
     <div class="wrap foot">
       <div class="brand">
