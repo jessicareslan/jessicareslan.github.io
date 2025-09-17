@@ -1,36 +1,29 @@
-/* ========== Base ==========
-   Color vars + layout
-*/
+/* ========== Base ========== */
 :root{
-  --ink:#0f1013;
   --bg:#000000;
   --white:#ffffff;
   --pink:#D10072;
   --muted:#a0a6af;
   --max:1180px;
 
-  /* pointer vars default (used by the animated bg) */
+  /* pointer vars for interactive background */
   --posX: 0;
   --posY: 0;
 }
+
 *{ box-sizing:border-box; }
 html, body{ margin:0; }
 
-/* ONE body rule: solid fallback + animated gradient */
-body{
-  min-height:100vh;
-  /* nicer viewport on mobile browsers that hide URL bar */
+/* Flex column so footer stays at bottom with little content */
+.site{
   min-height:100svh;
+  display:flex;
+  flex-direction:column;
   color:var(--white);
-  background-color:#0c0d10; /* fallback if gradients unsupported */
-  font-family: system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, sans-serif;
-  line-height:1.5;
 
-  /* map JS-provided pointer vars to px */
+  /* interactive cosmic background on the BODY */
   --x: calc(var(--posX) * 1px);
   --y: calc(var(--posY) * 1px);
-
-  /* interactive cosmic background */
   background-image:
     linear-gradient(115deg, rgb(211 255 215), rgb(0 0 0)),
     radial-gradient( 90% 100% at calc(50% + var(--x)) calc(0% + var(--y)),  rgb(200 200 200), rgb(22 0 45)),
@@ -41,7 +34,6 @@ body{
   background-blend-mode: overlay, overlay, difference, difference, difference, normal;
 }
 
-/* wrapper width helper */
 .wrap{ max-width:var(--max); margin:0 auto; padding:0 22px; }
 
 /* ========== Header ========== */
@@ -51,26 +43,14 @@ header{
   justify-content:space-between;
   align-items:center;
   background:#000;
-  color:var(--white);
-  position:sticky;
-  top:0;
-  z-index:1000;
-  overflow:visible; /* allows dropdown to overflow */
+  position:sticky; top:0; z-index:1000;
 }
-.logo,
-.logo:link,
-.logo:visited,
-.logo:hover,
-.logo:active,
-.logo-text{
-  text-decoration:none !important;
-  color:var(--white);
+.logo, .logo:link, .logo:visited, .logo:hover, .logo:active, .logo-text{
+  text-decoration:none !important; color:var(--white);
 }
 .logo-text{
   font-family:'Bitcount Grid Double', sans-serif;
-  font-weight:500;
-  font-size:2rem;
-  letter-spacing:.7px;
+  font-weight:600; font-size:2rem; letter-spacing:.7px;
   transition:color .2s ease;
 }
 .logo:hover, .logo:hover .logo-text{ color:var(--pink); }
@@ -78,11 +58,9 @@ header{
 nav{ display:flex; gap:20px; }
 nav a{
   font-family:'Emilys Candy', serif;
-  font-weight:600;
-  letter-spacing:.4px;
-  padding:6px 0;
-  transition:color .2s ease;
-  text-decoration:none;
+  font-weight:600; letter-spacing:.4px;
+  padding:6px 0; text-decoration:none;
+  transition:color .2s ease; color:#fff;
 }
 nav a:hover{ color:var(--pink); }
 
@@ -90,66 +68,62 @@ nav a:hover{ color:var(--pink); }
 .dropdown{ position:relative; }
 .dropdown > a{ display:inline-flex; align-items:center; gap:6px; }
 .dropdown-content{
-  display:none;
-  position:absolute;
-  top:calc(100% + 6px);
-  left:0;
-  min-width:200px;
-  background:#111;
-  border-radius:8px;
-  box-shadow:0 12px 30px rgba(0,0,0,.35);
-  padding:6px 0;
+  display:none; position:absolute; top:calc(100% + 6px); left:0; min-width:200px;
+  background:#111; border-radius:8px; box-shadow:0 12px 30px rgba(0,0,0,.35); padding:6px 0;
   z-index:9999;
 }
-.dropdown-content a{
-  display:block;
-  padding:10px 14px;
-}
-.dropdown-content a:hover{
-  background:var(--pink);
-  color:#fff;
-}
-/* show on hover (desktop) and when .open is toggled (mobile via JS) */
-.dropdown:hover .dropdown-content,
-.dropdown.open .dropdown-content{ display:block; }
+.dropdown-content a{ display:block; padding:10px 14px; }
+.dropdown-content a:hover{ background:var(--pink); color:#fff; }
+.dropdown:hover .dropdown-content, .dropdown.open .dropdown-content{ display:block; }
 
-/* ========== “LATEST” circle corner placement ========== */
+/* ========== Hero ========== */
+.hero-banner{
+  position:relative;
+  display:grid; place-items:center;
+  min-height:60svh; /* visible even on short screens */
+  text-align:left;
+}
+.hero-banner .overlay{ position:relative; z-index:1; width:100%; max-width:var(--max); padding:40px 22px; }
+
+/* LATEST circle pinned to corner */
 .latest-circle-wrap{
-  position:absolute;   /* place in a corner over hero or page */
-  z-index:3;
-  pointer-events:none; /* badge is decorative; remove if links inside */
+  position:absolute; z-index:2; pointer-events:none;
 }
-.latest-circle-wrap.top-left    { top:20px; left:20px; }
-.latest-circle-wrap.top-right   { top:20px; right:20px; }
-.latest-circle-wrap.bottom-left { bottom:20px; left:20px; }
-.latest-circle-wrap.bottom-right{ bottom:20px; right:20px; }
-
-/* ========== Sparkling text style (if used) ========== */
-.sparkle{
-  font-family:'Emilys Candy', sans-serif;
-  font-size:clamp(2.6rem, 7vw, 5rem);
-  font-weight:700;
-  text-transform:uppercase;
-  background: linear-gradient(90deg, #fff, var(--pink), #fff);
-  background-size:200% auto;
-  -webkit-background-clip:text;
-  -webkit-text-fill-color:transparent;
-  animation: shine 3s linear infinite;
+.latest-circle-wrap.top-left{ top:22px; left:22px; }
+.latest-circle{ animation: latest-rotate 24s linear infinite; }
+.ring-text{
+  font-family:'Bitcount Grid Double', sans-serif; font-weight:600;
+  font-size:20px; /* adjust the circle text size */
+  animation: latest-color 18s linear infinite;
 }
-@keyframes shine{
-  0% { background-position:200% center; }
-  100%{ background-position:0% center; }
+@keyframes latest-rotate { to { transform: rotate(360deg); } }
+@keyframes latest-color {
+  0% { fill:#ffffff; }
+  33%{ fill:#D10072; }
+  66%{ fill:#9966CC; }
+  100%{ fill:#ffffff; }
 }
 
-/* ========== Responsive helpers ========== */
-@media (max-width:980px){
-  .foot{ display:grid; grid-template-columns:1fr; }
+/* Hero headings */
+.hero-title{
+  font-family:'Bitcount Grid Double', sans-serif;
+  font-size: clamp(1.8rem, 4vw, 2.6rem);
+  margin:0 0 8px 0;
 }
-@media (max-width:640px){
-  nav{ gap:14px; }
+.hero-tag{ margin:0; color:#e8e8ea; }
+
+/* ========== Footer ========== */
+main{ flex:1; } /* pushes footer to the bottom if little content */
+
+footer{
+  border-top:1px solid rgba(255,255,255,.08);
+  padding:26px 0 40px;
+  background: rgba(0,0,0,.35);
 }
+.foot{ display:flex; gap:22px; align-items:center; justify-content:space-between; flex-wrap:wrap; }
+.brand .logo-text{ font-size:1.1rem; }
 
 /* ========== Reduced motion ========== */
 @media (prefers-reduced-motion: reduce){
-  .sparkle, .logo-text, nav a { animation:none; transition:none; }
+  .logo-text, nav a, .latest-circle{ animation:none; transition:none; }
 }
