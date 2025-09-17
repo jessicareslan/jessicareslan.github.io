@@ -87,29 +87,28 @@ nav a:hover{ color:var(--pink); }
 .dropdown:hover .dropdown-content,
 .dropdown.open .dropdown-content{ display:block; }
 
-/* Hero background */
-.hero-banner{
-  position:relative;
-  height:100vh; /* full screen */
-  background: url("assets/images/hero.jpg") no-repeat center / cover;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  text-align:center;
-}
-@supports (height: 100svh){
-  .hero-banner{ height:100svh; } /* better mobile viewport on iOS/Android */
+.hero-banner {
+  position: relative;
+  height: 100vh; /* full screen height */
+  background: url("assets/images/hero.jpg") no-repeat center center/cover;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
 }
 
-/* Dark overlay on top of image */
-.hero-banner::before{
-  content:"";
-  position:absolute;
-  inset:0;
-  background:rgba(0,0,0,.45);
-  z-index:1;
+.hero-banner::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: rgba(0,0,0,0.45); /* dark overlay so text pops */
+  z-index: 1;
 }
-.hero-banner .overlay{ position:relative; z-index:2; }
+
+.hero-banner .overlay {
+  position: relative;
+  z-index: 2; /* sits above overlay */
+}
 
 /* Sparkling text effect */
 .sparkle{
