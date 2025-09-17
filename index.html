@@ -11,65 +11,43 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Bitcount+Grid+Double:wght@100..900&family=Emilys+Candy&family=Philosopher:wght@400;700&display=swap" rel="stylesheet">
 
-  <!-- Your main stylesheet (header, layout, etc.) -->
+  <!-- Your main stylesheet (header, layout, hero background, etc.) -->
   <link rel="stylesheet" href="assets/style.css" />
 
-  <!-- Spinning + color-cycling 'LATEST' badge styles -->
+  <!-- Spinning + color-cycling 'LATEST' badge styles (kept small & focused) -->
   <style>
     .latest-wrap {
       display: grid;
       place-items: center;
-      padding: 40px 0; /* adjust or remove if you place this in a hero */
+      padding: 40px 0;
     }
-
     .latest-circle {
       display: inline-block;
-      /* rotate the whole badge */
       animation: latest-rotate 12s linear infinite;
       will-change: transform;
     }
-
-    /* the text along the circle path */
     .latest-circle .ring-text {
       font-family: 'Bitcount Grid Double', sans-serif;
       font-weight: 600;
-      /* cycle through colors */
       animation: latest-color 6s linear infinite;
     }
-
-    /* rotate the badge */
-    @keyframes latest-rotate {
-      to { transform: rotate(360deg); }
-    }
-
-    /* color cycle: white → deep pink → teal → white */
+    @keyframes latest-rotate { to { transform: rotate(360deg); } }
+    /* color cycle: white → deep pink → violet → white */
     @keyframes latest-color {
       0%   { fill: #ffffff; }
-      33%  { fill: #D10072; } /* deep pink */
-      66%  { fill: #9966CC; } /* teal */
+      33%  { fill: #D10072; }  /* deep pink */
+      66%  { fill: #9966CC; }  /* violet (amethyst) */
       100% { fill: #ffffff; }
+    }
+    /* Visually hidden helper for accessible headings */
+    .visually-hidden {
+      position: absolute !important;
+      height: 1px; width: 1px;
+      overflow: hidden; clip: rect(1px, 1px, 1px, 1px);
+      white-space: nowrap; border: 0; padding: 0; margin: -1px;
     }
   </style>
 </head>
-
-  <!-- Hero Section with background -->
-<section class="hero-banner">
-  <div class="overlay">
-    <!-- Put your spinning circle here -->
-    <div class="latest-circle" aria-hidden="true">
-      <svg viewBox="0 0 200 200" width="160" height="160">
-        <defs>
-          <path id="latest-circle-path" d="M100,100 m-75,0 a75,75 0 1,1 150,0 a75,75 0 1,1 -150,0" />
-        </defs>
-        <text font-size="16" class="ring-text" letter-spacing="3">
-          <textPath href="#latest-circle-path" startOffset="0%">
-            LATEST • LATEST • LATEST • LATEST • LATEST •
-          </textPath>
-        </text>
-      </svg>
-    </div>
-  </div>
-</section>
 <body>
 
   <!-- Header -->
@@ -93,23 +71,26 @@
     </nav>
   </header>
 
-  <!-- Spinning 'LATEST' circle -->
-  <section class="latest-wrap" aria-labelledby="latest-label">
-    <h2 id="latest-label" class="visually-hidden">Latest</h2>
-    <div class="latest-circle" aria-hidden="true">
-      <svg viewBox="0 0 200 200" width="160" height="160">
-        <defs>
-          <!-- circle path for text to follow -->
-          <path id="latest-circle-path" d="M100,100 m-75,0 a75,75 0 1,1 150,0 a75,75 0 1,1 -150,0" />
-        </defs>
-        <!-- optional center dot -->
-        <circle cx="100" cy="100" r="3" fill="#D10072"></circle>
-        <text font-size="16" class="ring-text" letter-spacing="3">
-          <textPath href="#latest-circle-path" startOffset="0%">
-            LATEST • LATEST • LATEST • LATEST • LATEST •
-          </textPath>
-        </text>
-      </svg>
+  <!-- Hero Section with background image (set in assets/style.css) -->
+  <section class="hero-banner">
+    <div class="overlay">
+      <!-- Spinning 'LATEST' circle -->
+      <section class="latest-wrap" aria-labelledby="latest-label">
+        <h2 id="latest-label" class="visually-hidden">Latest</h2>
+        <div class="latest-circle" aria-hidden="true">
+          <svg viewBox="0 0 200 200" width="160" height="160">
+            <defs>
+              <path id="latest-circle-path-hero"
+                d="M100,100 m-75,0 a75,75 0 1,1 150,0 a75,75 0 1,1 -150,0" />
+            </defs>
+            <text font-size="16" class="ring-text" letter-spacing="3">
+              <textPath href="#latest-circle-path-hero" startOffset="0%">
+                LATEST • LATEST • LATEST • LATEST • LATEST •
+              </textPath>
+            </text>
+          </svg>
+        </div>
+      </section>
     </div>
   </section>
 
@@ -125,15 +106,5 @@
 
   <!-- Optional: dropdown tap-to-open support for mobile -->
   <script src="assets/script.js"></script>
-
-  <!-- tiny helper to hide the “Latest” heading visually but keep for screen readers -->
-  <style>
-    .visually-hidden {
-      position: absolute !important;
-      height: 1px; width: 1px;
-      overflow: hidden; clip: rect(1px, 1px, 1px, 1px);
-      white-space: nowrap; border: 0; padding: 0; margin: -1px;
-    }
-  </style>
 </body>
 </html>
