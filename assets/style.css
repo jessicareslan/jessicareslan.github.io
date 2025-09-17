@@ -39,19 +39,49 @@ nav a:hover{ color:var(--pink); }
 .dropdown:hover .dropdown-content,
 .dropdown.open .dropdown-content{ display:block; }
 
-/* Hero banner with background */
-.hero-banner{
-  position:relative;
-  background-image:url('assets/images/hero.jpg'); /* replace with your image */
-  background-size:cover; background-position:center;
-  text-align:center; padding:120px 20px; color:#fff;
+/* Hero background */
+.hero-banner {
+  position: relative;
+  height: 100vh; /* full screen height */
+  background: url("assets/images/hero.jpg") no-repeat center center/cover;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
 }
-.hero-banner::before{ content:""; position:absolute; inset:0; background:rgba(0,0,0,.35); }
-.hero-banner .overlay{ position:relative; z-index:1; }
-.hero-banner h1{ font-family:'Bitcount Grid Double', sans-serif; font-size:2.6rem; margin:0 0 10px; }
-.hero-banner p{ margin:0 0 18px; font-size:1.1rem; color:#e8e8ea; }
-.btn{ background:var(--pink); color:#fff; padding:12px 18px; border-radius:999px; font-weight:500; transition:opacity .2s; display:inline-block; }
-.btn:hover{ opacity:.9; }
+
+/* Dark overlay on top of image */
+.hero-banner::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: rgba(0,0,0,0.45); /* dim effect */
+  z-index: 1;
+}
+
+.hero-banner .overlay {
+  position: relative;
+  z-index: 2;
+}
+
+/* Sparkling text effect */
+.sparkle {
+  font-family: 'Bitcount Grid Double', sans-serif;
+  font-size: 5rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  background: linear-gradient(90deg, #fff, #D10072, #fff);
+  background-size: 200% auto;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  animation: shine 3s linear infinite;
+}
+
+/* Shimmer animation */
+@keyframes shine {
+  0%   { background-position: 200% center; }
+  100% { background-position: 0% center; }
+}
 
 /* Latest grid */
 h2{ margin:24px 0 12px; font-family:'Emilys Candy', serif; font-size:1.6rem; }
