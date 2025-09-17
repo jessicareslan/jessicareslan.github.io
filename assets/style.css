@@ -16,7 +16,7 @@ header{
 }
 .logo-text{
   font-family:'Bitcount Grid Double', sans-serif;
-  font-weight:600; font-size:2rem; letter-spacing:.7px; transition:color .2s ease;
+  font-weight:500; font-size:2rem; letter-spacing:.7px; transition:color .2s ease;
 }
 .logo:hover, .logo:hover .logo-text{ color:var(--pink); }
 
