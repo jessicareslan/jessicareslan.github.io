@@ -30,40 +30,20 @@ html, body{ margin:0; }
   background-blend-mode: overlay, normal;
 }
 
-/* The moving glow (transform only = cheap) */
-.bg-sheen{
-  position:fixed; inset:0; z-index:-1; pointer-events:none;
-  will-change: transform, opacity;
+  /* interactive cosmic background on the BODY */
+  --x: calc(var(--posX) * 1px);
+  --y: calc(var(--posY) * 1px);
+  background-image:
+    linear-gradient(115deg, rgb(211 255 215), rgb(0 0 0)),
+    radial-gradient( 90% 100% at calc(50% + var(--x)) calc(0% + var(--y)),  rgb(200 200 200), rgb(22 0 45)),
+    radial-gradient(100% 100% at calc(80% - var(--x)) calc(0% - var(--y)),   rgb(250 255 0),   rgb(36 0 0)),
+    radial-gradient(150% 210% at calc(100% + var(--x)) calc(0% + var(--y)),  rgb(20 175 125),  rgb(0 10 255)),
+    radial-gradient(100% 100% at calc(100% - var(--x)) calc(30% - var(--y)), rgb(255 77 0),    rgb(0 200 255)),
+    linear-gradient(60deg, rgb(255 0 0), rgb(120 86 255));
+  background-blend-mode: overlay, overlay, difference, difference, difference, normal;
 }
-.bg-sheen::before,
-.bg-sheen::after{
-  content:"";
-  position:absolute; left:50%; top:50%;
-  width:900px; height:900px; border-radius:50%;
-  transform:translate(-50%,-50%);
-  background:
-    radial-gradient(closest-side, rgba(20,175,125,.35), transparent 70%),
-    radial-gradient(closest-side, rgba(255,77,0,.25), transparent 70%);
-  mix-blend-mode: screen;
-  filter: blur(30px);
-}
-
-/* JS: move just the sheen */
-(() => {
-  const sheen = document.querySelector('.bg-sheen');
-  let tx=0, ty=0, ticking=false, last=0;
-  function apply(){ sheen.style.transform = `translate(${tx}px, ${ty}px)`; ticking=false; }
-  window.addEventListener('pointermove', (e) => {
-    const now = performance.now();
-    if (now - last < 33) return; last = now;
-    tx = (e.clientX - innerWidth/2) * 0.04;
-    ty = (e.clientY - innerHeight/2) * 0.04;
-    if (!ticking){ requestAnimationFrame(apply); ticking = true; }
-  }, { passive:true });
-})();
 
 .wrap{ max-width:var(--max); margin:0 auto; padding:0 22px; }
-
 /* ========== Header ========== */
 header{
   padding:16px 22px;
