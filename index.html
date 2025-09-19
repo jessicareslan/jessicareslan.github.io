@@ -9,7 +9,7 @@
   <!-- Google Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Bitcount+Grid+Double:wght@100..900&family=Emilys+Candy&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Bitcount+Grid+Double:wght@100..900&display=swap" rel="stylesheet">
 
   <link rel="stylesheet" href="assets/style.css" />
 </head>
@@ -36,15 +36,15 @@
     </nav>
   </header>
 
-  <!-- Hero (background is on BODY; hero is a content canvas) -->
+  <!-- Hero -->
   <section class="hero-banner">
     <div class="overlay">
-      <div class="latest-circle-wrap top-left" aria-hidden="false">
+      <div class="latest-circle-wrap top-left" aria-hidden="true">
         <div class="latest-circle">
           <svg viewBox="0 0 200 200" width="160" height="160">
             <defs>
               <path id="latest-circle-path"
-                    d="M100,100 m-75,0 a75,75 0 1,1 150,0 a75,75 0 1,1 -150,0" />
+                d="M100,100 m-75,0 a75,75 0 1,1 150,0 a75,75 0 1,1 -150,0" />
             </defs>
             <text class="ring-text" letter-spacing="3">
               <textPath href="#latest-circle-path" startOffset="0%">
@@ -52,18 +52,29 @@
               </textPath>
             </text>
           </svg>
-
-          <!-- 💌 Button centered in the ring -->
-          <button class="mail-btn" id="openNewsletter" aria-haspopup="dialog" aria-controls="newsletterModal">
-            <img src="assets/images/mail.jpg" />
+          <!-- Mail button in center -->
+          <button class="mail-btn" id="openNewsletter">
+            <img src="assets/images/cute-mail.png" alt="Join Newsletter" />
           </button>
         </div>
       </div>
     </div>
   </section>
 
+  <!-- Newsletter Modal -->
+  <div class="newsletter-modal" id="newsletterModal">
+    <div class="modal-content">
+      <span class="close-btn" id="closeNewsletter">&times;</span>
+      <h2>Join the Funky Earth Newsletter</h2>
+      <form id="newsletterForm">
+        <input type="email" placeholder="Your email address" required />
+        <button type="submit">Subscribe</button>
+      </form>
+    </div>
+  </div>
+
   <main class="wrap" id="articles" role="main">
-    <!-- your content cards go here -->
+    <!-- content -->
   </main>
 
   <footer>
@@ -77,18 +88,6 @@
       </nav>
     </div>
   </footer>
-
-  <!-- Single Popup Modal (kept minimal; no extra "join" text on page) -->
-  <div class="newsletter-modal" id="newsletterModal" role="dialog" aria-modal="true" aria-labelledby="newsletterTitle">
-    <div class="modal-content">
-      <button class="close-btn" id="closeNewsletter" aria-label="Close">×</button>
-      <h2 id="newsletterTitle" class="sr-only">Newsletter signup</h2>
-      <form id="newsletterForm">
-        <input type="email" placeholder="Your email address" required />
-        <button type="submit">Subscribe</button>
-      </form>
-    </div>
-  </div>
 
   <script src="assets/script.js"></script>
 </body>
