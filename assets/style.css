@@ -156,6 +156,14 @@ nav a:hover{ color:var(--pink); }
 }
 .hero-tag{ margin:0; color:#e8e8ea; }
 
+/* Mail button centered; re-enable pointer events just in case */
+.mail-btn{
+  position:absolute; top:50%; left:50%; transform:translate(-50%,-50%);
+  background:none; border:none; cursor:pointer; pointer-events:auto;
+}
+.mail-btn img{ width:60px; height:auto; display:block; transition:transform .2s; }
+.mail-btn:hover img{ transform:scale(1.2); }
+
 /* ========== Footer ========== */
 main{ flex:1; } /* push footer down */
 footer{
