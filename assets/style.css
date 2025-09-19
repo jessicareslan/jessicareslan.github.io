@@ -36,7 +36,11 @@ html, body{ margin:0; }
     linear-gradient(60deg, rgb(255 0 0), rgb(120 86 255));
   background-blend-mode: overlay, overlay, difference, difference, difference, normal;
 
-  background-size: 200% 200%;   /* make it larger so movement is visible */
+
+  .hero-banner{min-height:60svh; display:grid; place-items:center}
+  .hero-title{margin:0}
+  .hero-tag{margin:.25rem 0 0}
+  main{flex:1}
   animation: cosmicShift 60s ease-in-out infinite alternate;
 }
 
