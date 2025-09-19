@@ -74,7 +74,7 @@ body.site{
   /* background-attachment: fixed; */
 
   will-change: background-position;
-  animation: cosmicLayers 28s ease-in-out infinite alternate;
+  animation: cosmicLayers 5s ease-in-out infinite alternate;
 }
 
 @keyframes cosmicLayers{
