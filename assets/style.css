@@ -1,3 +1,4 @@
+/* ========== Base ========== */
 :root{
   --bg:#000000;
   --white:#ffffff;
@@ -9,49 +10,104 @@
 *{ box-sizing:border-box; }
 html, body{ margin:0; }
 
-body.site{
-  min-height:100svh;
-  display:flex;
-  flex-direction:column;
-  color:#fff;
-  background-color:#000;
-
-  background-image:
-    linear-gradient(115deg, rgb(211 255 215), rgb(0 0 0)),
-    radial-gradient(90% 100% at 50% 0%, rgb(200 200 200), rgb(22 0 45)),
-    radial-gradient(100% 100% at 80% 0%, rgb(250 255 0), rgb(36 0 0)),
-    radial-gradient(150% 210% at 100% 0%, rgb(20 175 125), rgb(0 10 255)),
-    radial-gradient(100% 100% at 100% 30%, rgb(255 77 0), rgb(0 200 255)),
-    linear-gradient(60deg, rgb(255 0 0), rgb(120 86 255));
-  background-blend-mode: overlay, overlay, difference, difference, difference, normal;
-
-  background-size: 100% 100%;
-  animation: cosmicShift 15s ease-in-out infinite alternate;
-}
-
-@keyframes cosmicShift{
-  0%   { background-position: 0% 0%; }
-  50%  { background-position: 100% 50%; }
-  100% { background-position: 0% 100%; }
-}
-
-/* Logo */
+/* main logo text */
 .logo-text {
   font-family:'Bitcount Grid Double', sans-serif;
   font-weight:450;
   font-size:2rem;
   letter-spacing:.7px;
-  display:block;
-}
-.tagline {
-  font-family:'Bitcount Grid Double', sans-serif;
-  font-size:0.9rem;
-  font-weight:300;
-  margin:4px 0 0;
-  color:#ccc;
+  display:block;         /* makes sure it sits above tagline */
 }
 
-/* Header */
+/* tagline below logo */
+.tagline {
+  font-family:'Bitcount Grid Double', sans-serif; /* same font */
+  font-size:0.9rem;        /* smaller size */
+  font-weight:300;         /* lighter */
+  margin:4px 0 0;          /* small space below Funky Earth */
+  color:#ccc;              /* optional lighter color */
+}
+
+.wrap{ max-width:var(--max); margin:0 auto; padding:0 22px; }
+
+/* ========== Body / Layout ========== */
+/* use BODY when it has class="site" */
+
+/* BACKGROUND with multi-layer parallax that actually animates */
+body.site{
+  min-height:100svh;
+  display:flex;
+  flex-direction:column;
+  color:#fff;
+
+  background-color:#000; /* fallback */
+
+  background-image:
+    linear-gradient(115deg, rgb(211 255 215), rgb(0 0 0)),
+    radial-gradient( 90% 100% at 50% 0%,  rgb(200 200 200), rgb(22 0 45)),
+    radial-gradient(100% 100% at 80% 0%,  rgb(250 255 0),  rgb(36 0 0)),
+    radial-gradient(150% 210% at 100% 0%, rgb(20 175 125), rgb(0 10 255)),
+    radial-gradient(100% 100% at 100% 30%, rgb(255 77 0),  rgb(0 200 255)),
+    linear-gradient(60deg, rgb(255 0 0), rgb(120 86 255));
+  background-blend-mode: overlay, overlay, difference, difference, difference, normal;
+
+  /* important: initial sizes + positions for ALL layers */
+ background-size:
+    120% 120%,  /* layer 1 */
+    110% 110%,  /* layer 2 */
+    130% 130%,  /* layer 3 */
+    140% 140%,  /* layer 4 */
+    120% 120%,  /* layer 5 */
+    140% 140%;  /* layer 6 */
+  
+  background-position:
+    0%   0%,   /* 1 */
+    80%  10%,  /* 2 */
+    0%   40%,  /* 3 */
+    100% 0%,   /* 4 */
+    0%   60%,  /* 5 */
+    100% 50%;  /* 6 */
+
+  background-repeat: no-repeat;
+
+  /* NOTE: fixed can break animation on Safari/iOS; disable for reliable motion */
+  /* background-attachment: fixed; */
+
+  will-change: background-position;
+  animation: cosmicLayers 5s ease-in-out infinite alternate;
+}
+
+@keyframes cosmicLayers{
+  0%{
+    background-position:
+      0%   0%,
+      80%  10%,
+      0%   40%,
+      100% 0%,
+      0%   60%,
+      100% 50%;
+  }
+  50%{
+    background-position:
+      200% 100%,  /* exaggerate movement */
+      -50%  0%,
+      150% 120%,
+      -100% 40%,
+      200% 20%,
+      -50%  90%;
+  }
+  100%{
+    background-position:
+      0%   200%,
+      150% -50%,
+      -50%  10%,
+      200% 200%,
+      -100% 30%,
+      150% -50%;
+  }
+}
+
+/* ========== Header ========== */
 header{
   padding:16px 22px;
   display:flex;
@@ -60,6 +116,16 @@ header{
   background:#000;
   position:sticky; top:0; z-index:1000;
 }
+.logo, .logo:link, .logo:visited, .logo:hover, .logo:active, .logo-text{
+  text-decoration:none !important; color:var(--white);
+}
+.logo-text{
+  font-family:'Bitcount Grid Double', sans-serif;
+  font-weight:450; font-size:2rem; letter-spacing:.7px;
+  transition:color .2s ease;
+}
+.logo:hover, .logo:hover .logo-text{ color:var(--pink); }
+
 nav{ display:flex; gap:20px; }
 nav a{
   font-family:'Bitcount Grid Double', serif;
@@ -69,8 +135,9 @@ nav a{
 }
 nav a:hover{ color:var(--pink); }
 
-/* Dropdown */
+/* ========== Dropdown ========== */
 .dropdown{ position:relative; }
+.dropdown > a{ display:inline-flex; align-items:center; gap:6px; }
 .dropdown-content{
   display:none; position:absolute; top:calc(100% + 6px); left:0; min-width:200px;
   background:#111; border-radius:8px; box-shadow:0 12px 30px rgba(0,0,0,.35); padding:6px 0;
@@ -80,16 +147,27 @@ nav a:hover{ color:var(--pink); }
 .dropdown-content a:hover{ background:var(--pink); color:#fff; }
 .dropdown:hover .dropdown-content, .dropdown.open .dropdown-content{ display:block; }
 
-/* Hero */
-.hero-banner{ position:relative; display:grid; place-items:center; min-height:60svh; }
-.latest-circle-wrap{ position:absolute; top:22px; left:22px; }
+/* ========== Hero ========== */
+.hero-banner{
+  position:relative;
+  display:grid; place-items:center;
+  min-height:60svh;
+  text-align:left;
+}
+.hero-banner .overlay{
+  position:relative; z-index:1; width:100%;
+  max-width:var(--max); padding:40px 22px;
+}
+
+/* LATEST circle */
+.latest-circle-wrap{ position:absolute; z-index:2; pointer-events:none; }
+.latest-circle-wrap.top-left{ top:22px; left:22px; }
 .latest-circle{ animation: latest-rotate 24s linear infinite; }
 .ring-text{
-  font-family:'Bitcount Grid Double', sans-serif;
-  font-weight:600; font-size:20px;
+  font-family:'Bitcount Grid Double', sans-serif; font-weight:600; font-size:20px;
   animation: latest-color 18s linear infinite;
 }
-@keyframes latest-rotate{ to{ transform: rotate(360deg);} }
+@keyframes latest-rotate{ to { transform: rotate(360deg); } }
 @keyframes latest-color{
   0%{ fill:#ffffff; }
   33%{ fill:#D10072; }
@@ -97,42 +175,27 @@ nav a:hover{ color:var(--pink); }
   100%{ fill:#ffffff; }
 }
 
-/* Mail button */
-.mail-btn {
-  position: absolute;
-  top: 50%; left: 50%;
-  transform: translate(-50%, -50%);
-  background: none; border: none; cursor: pointer;
+/* Hero headings */
+.hero-title{
+  font-family:'Bitcount Grid Double', sans-serif;
+  font-size: clamp(1.8rem, 4vw, 2.6rem);
+  margin:0 0 8px 0;
 }
-.mail-btn img { width: 60px; transition: transform .2s; }
-.mail-btn:hover img { transform: scale(1.2); }
+.hero-tag{ margin:0; color:#e8e8ea; }
 
-/* Modal */
-.newsletter-modal {
-  display:none;
-  position:fixed; inset:0;
-  background:rgba(0,0,0,.8);
-  justify-content:center; align-items:center;
-  z-index:2000;
+/* ========== Footer ========== */
+main{ flex:1; } /* push footer down */
+footer{
+  border-top:1px solid rgba(255,255,255,.08);
+  padding:26px 0 40px;
+  background: rgba(0,0,0,.35);
 }
-.modal-content {
-  background:#111; color:#fff;
-  padding:30px; border-radius:12px;
-  max-width:400px; width:90%; text-align:center;
-}
-.modal-content input {
-  width:100%; padding:10px; margin-top:12px;
-  border:none; border-radius:6px;
-}
-.modal-content button {
-  margin-top:14px; padding:10px;
-  background:#FF69B4; border:none; border-radius:6px;
-  color:#fff; font-weight:bold; cursor:pointer;
-}
-.modal-content button:hover { background:#D10072; }
-.close-btn { float:right; font-size:1.5rem; cursor:pointer; }
-
-/* Footer */
-footer{ border-top:1px solid rgba(255,255,255,.08); padding:26px 0 40px; background:rgba(0,0,0,.35);}
-.foot{ display:flex; gap:22px; align-items:center; justify-content:space-between; flex-wrap:wrap;}
+.foot{ display:flex; gap:22px; align-items:center; justify-content:space-between; flex-wrap:wrap; }
 .brand .logo-text{ font-size:1.1rem; }
+
+/* ========== Reduced motion ========== */
+@media (prefers-reduced-motion: reduce){
+  body.site{ animation:none; }
+  .logo-text, nav a, .latest-circle{ animation:none; transition:none; }
+}
+
