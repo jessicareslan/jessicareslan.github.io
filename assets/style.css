@@ -33,35 +33,15 @@ html, body{ margin:0; }
 /* ========== Body / Layout ========== */
 /* use BODY when it has class="site" */
 
-/* A soft rotating sheen on top of the same background */
-body.site::before{
-  content:"";
-  position:fixed; inset:-15%;
-  z-index:-1;                /* behind content */
-  pointer-events:none;
-  opacity:.35;
-  filter: blur(36px);
-  mix-blend-mode: screen;
-  background:
-    radial-gradient(closest-side, rgba(255,16,240,.22), transparent 70%) 40% 40% / 60% 60% no-repeat,
-    radial-gradient(closest-side, rgba(0,140,255,.18),  transparent 70%) 60% 60% / 55% 55% no-repeat,
-    radial-gradient(closest-side, rgba(20,175,125,.18), transparent 70%) 50% 50% / 70% 70% no-repeat;
-  transform-origin: 50% 50%;
-  animation: sheenSpin 30s linear infinite;
-}
-@keyframes sheenSpin { to { transform: rotate(360deg); } }
-
-
+/* BACKGROUND with multi-layer parallax that actually animates */
 body.site{
   min-height:100svh;
   display:flex;
   flex-direction:column;
   color:#fff;
 
-  /* solid fallback to avoid white flashes */
-  background-color:#000;
+  background-color:#000; /* fallback */
 
-  /* the same layers you have now */
   background-image:
     linear-gradient(115deg, rgb(211 255 215), rgb(0 0 0)),
     radial-gradient( 90% 100% at 50% 0%,  rgb(200 200 200), rgb(22 0 45)),
@@ -71,32 +51,41 @@ body.site{
     linear-gradient(60deg, rgb(255 0 0), rgb(120 86 255));
   background-blend-mode: overlay, overlay, difference, difference, difference, normal;
 
-  /* give layers different scales so motion feels dimensional */
+  /* important: initial sizes + positions for ALL layers */
   background-size:
-    220% 220%,   /* layer 1 */
-    180% 180%,   /* layer 2 */
-    160% 160%,   /* layer 3 */
-    200% 200%,   /* layer 4 */
-    180% 180%,   /* layer 5 */
-    200% 200%;   /* layer 6 */
+    220% 220%,  /* 1 */
+    180% 180%,  /* 2 */
+    160% 160%,  /* 3 */
+    200% 200%,  /* 4 */
+    180% 180%,  /* 5 */
+    200% 200%;  /* 6 */
+
+  background-position:
+    0%   0%,   /* 1 */
+    80%  10%,  /* 2 */
+    0%   40%,  /* 3 */
+    100% 0%,   /* 4 */
+    0%   60%,  /* 5 */
+    100% 50%;  /* 6 */
 
   background-repeat: no-repeat;
-  background-attachment: fixed;     /* looks great with big drifts */
 
-  /* multi-layer parallax drift (faster + cooler than a simple fade) */
+  /* NOTE: fixed can break animation on Safari/iOS; disable for reliable motion */
+  /* background-attachment: fixed; */
+
+  will-change: background-position;
   animation: cosmicLayers 28s ease-in-out infinite alternate;
 }
 
-/* Keyframes set a *list* of positions, one per background layer. */
 @keyframes cosmicLayers{
   0%{
     background-position:
-      0%   0%,   /* 1 */
-      80%  10%,  /* 2 */
-      0%   40%,  /* 3 */
-      100% 0%,   /* 4 */
-      0%   60%,  /* 5 */
-      100% 50%;  /* 6 */
+      0%   0%,
+      80%  10%,
+      0%   40%,
+      100% 0%,
+      0%   60%,
+      100% 50%;
   }
   50%{
     background-position:
