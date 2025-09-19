@@ -41,7 +41,7 @@ body.site{
   background-attachment: fixed;
 
   /* gentle drift */
-  animation: cosmicShift 30s ease-in-out infinite alternate;
+  animation: cosmicShift 15s ease-in-out infinite alternate;
 }
 
 @keyframes cosmicShift{
