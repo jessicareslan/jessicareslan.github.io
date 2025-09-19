@@ -26,28 +26,5 @@
   });
 })();
 
-// 2) Interactive background — write --posX/--posY on :root
-// throttle to ~30fps + snap to 8px grid
-(() => {
-  const root = document.documentElement;
-  let px=0, py=0, ticking=false, last=0;
 
-  function apply(){ 
-    root.style.setProperty('--posX', px);
-    root.style.setProperty('--posY', py);
-    ticking=false;
-  }
-
-  window.addEventListener('pointermove', (e) => {
-    const now = performance.now();
-    if (now - last < 33) return; // ~30fps
-    last = now;
-
-    // snap to 8px steps to avoid constant tiny repaints
-    px = Math.round((e.clientX - innerWidth/2) / 8) * 8;
-    py = Math.round((e.clientY - innerHeight/2) / 8) * 8;
-
-    if (!ticking){ requestAnimationFrame(apply); ticking=true; }
-  }, { passive:true });
-})();
 
