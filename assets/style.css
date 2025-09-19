@@ -52,14 +52,14 @@ body.site{
   background-blend-mode: overlay, overlay, difference, difference, difference, normal;
 
   /* important: initial sizes + positions for ALL layers */
-  background-size:
-    220% 220%,  /* 1 */
-    180% 180%,  /* 2 */
-    160% 160%,  /* 3 */
-    200% 200%,  /* 4 */
-    180% 180%,  /* 5 */
-    200% 200%;  /* 6 */
-
+ background-size:
+    120% 120%,  /* layer 1 */
+    110% 110%,  /* layer 2 */
+    130% 130%,  /* layer 3 */
+    140% 140%,  /* layer 4 */
+    120% 120%,  /* layer 5 */
+    140% 140%;  /* layer 6 */
+  
   background-position:
     0%   0%,   /* 1 */
     80%  10%,  /* 2 */
