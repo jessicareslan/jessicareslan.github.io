@@ -5,28 +5,22 @@
   --pink:#FF69B4;
   --muted:#a0a6af;
   --max:1180px;
-
-  /* pointer vars for interactive background */
-  --posX: 0;
-  --posY: 0;
 }
 
 *{ box-sizing:border-box; }
 html, body{ margin:0; }
 
-/* Flex column so footer stays at bottom with little content */
-.site{
+.wrap{ max-width:var(--max); margin:0 auto; padding:0 22px; }
+
+/* ========== Body / Layout ========== */
+/* use BODY when it has class="site" */
+body.site{
   min-height:100svh;
   display:flex;
   flex-direction:column;
   color:var(--white);
 
-  body {
-  margin: 0;
-  height: 100vh;
-  color: var(--white);
-  font-family: system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, sans-serif;
-
+  /* same layered cosmic background, now slowly drifting */
   background-image: 
     linear-gradient(115deg, rgb(211 255 215), rgb(0 0 0)),
     radial-gradient(90% 100% at 50% 0%, rgb(200 200 200), rgb(22 0 45)),
@@ -36,21 +30,18 @@ html, body{ margin:0; }
     linear-gradient(60deg, rgb(255 0 0), rgb(120 86 255));
   background-blend-mode: overlay, overlay, difference, difference, difference, normal;
 
-
-  .hero-banner{min-height:60svh; display:grid; place-items:center}
-  .hero-title{margin:0}
-  .hero-tag{margin:.25rem 0 0}
-  main{flex:1}
+  /* make movement visible and smooth */
+  background-size: 200% 200%;
   animation: cosmicShift 60s ease-in-out infinite alternate;
 }
 
-@keyframes cosmicShift {
-  0%   { background-position: 0% 0%; }
+/* the slow drift */
+@keyframes cosmicShift{
+  0%   { background-position: 0%   0%; }
   50%  { background-position: 100% 50%; }
   100% { background-position: 0% 100%; }
 }
 
-.wrap{ max-width:var(--max); margin:0 auto; padding:0 22px; }
 /* ========== Header ========== */
 header{
   padding:16px 22px;
@@ -95,25 +86,25 @@ nav a:hover{ color:var(--pink); }
 .hero-banner{
   position:relative;
   display:grid; place-items:center;
-  min-height:60svh; /* visible even on short screens */
+  min-height:60svh;
   text-align:left;
 }
-.hero-banner .overlay{ position:relative; z-index:1; width:100%; max-width:var(--max); padding:40px 22px; }
-
-/* LATEST circle pinned to corner */
-.latest-circle-wrap{
-  position:absolute; z-index:2; pointer-events:none;
+.hero-banner .overlay{
+  position:relative; z-index:1; width:100%;
+  max-width:var(--max); padding:40px 22px;
 }
+
+/* LATEST circle */
+.latest-circle-wrap{ position:absolute; z-index:2; pointer-events:none; }
 .latest-circle-wrap.top-left{ top:22px; left:22px; }
 .latest-circle{ animation: latest-rotate 24s linear infinite; }
 .ring-text{
-  font-family:'Bitcount Grid Double', sans-serif; font-weight:600;
-  font-size:20px; /* adjust the circle text size */
+  font-family:'Bitcount Grid Double', sans-serif; font-weight:600; font-size:20px;
   animation: latest-color 18s linear infinite;
 }
-@keyframes latest-rotate { to { transform: rotate(360deg); } }
-@keyframes latest-color {
-  0% { fill:#ffffff; }
+@keyframes latest-rotate{ to { transform: rotate(360deg); } }
+@keyframes latest-color{
+  0%{ fill:#ffffff; }
   33%{ fill:#D10072; }
   66%{ fill:#9966CC; }
   100%{ fill:#ffffff; }
@@ -128,8 +119,7 @@ nav a:hover{ color:var(--pink); }
 .hero-tag{ margin:0; color:#e8e8ea; }
 
 /* ========== Footer ========== */
-main{ flex:1; } /* pushes footer to the bottom if little content */
-
+main{ flex:1; } /* push footer down */
 footer{
   border-top:1px solid rgba(255,255,255,.08);
   padding:26px 0 40px;
@@ -140,5 +130,8 @@ footer{
 
 /* ========== Reduced motion ========== */
 @media (prefers-reduced-motion: reduce){
+  body.site{ animation:none; }
   .logo-text, nav a, .latest-circle{ animation:none; transition:none; }
 }
+
+
