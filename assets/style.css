@@ -32,14 +32,15 @@ html, body{ margin:0; }
 
 /* ========== Body / Layout ========== */
 /* BACKGROUND with multi-layer parallax that actually animates */
+/* --- Animated cosmic background (edge-safe) --- */
 body.site{
   min-height:100svh;
   display:flex;
   flex-direction:column;
   color:#fff;
+  background-color:#000;
 
-  background-color:#000; /* fallback */
-
+  /* same 6 layers you had */
   background-image:
     linear-gradient(115deg, rgb(211 255 215), rgb(0 0 0)),
     radial-gradient( 90% 100% at 50% 0%,  rgb(200 200 200), rgb(22 0 45)),
@@ -47,60 +48,64 @@ body.site{
     radial-gradient(150% 210% at 100% 0%, rgb(20 175 125), rgb(0 10 255)),
     radial-gradient(100% 100% at 100% 30%, rgb(255 77 0),  rgb(0 200 255)),
     linear-gradient(60deg, rgb(255 0 0), rgb(120 86 255));
+
+  /* blends can stay; these are dramatic. If you want softer, swap the 3 "difference"
+     ones for "screen" or "soft-light". */
   background-blend-mode: overlay, overlay, difference, difference, difference, normal;
 
-  /* initial sizes + positions for ALL layers */
+  /* Larger sizes keep gradient edges off-screen */
   background-size:
-    120% 120%,  /* 1 */
-    110% 110%,  /* 2 */
-    130% 130%,  /* 3 */
-    140% 140%,  /* 4 */
-    120% 120%,  /* 5 */
-    140% 140%;  /* 6 */
+    240% 240%,
+    220% 220%,
+    220% 220%,
+    240% 240%,
+    220% 220%,
+    240% 240%;
+
+  /* Start centered-ish; each layer offset a little for depth */
   background-position:
-    0%   0%,    /* 1 */
-    80%  10%,   /* 2 */
-    0%   40%,   /* 3 */
-    100% 0%,    /* 4 */
-    0%   60%,   /* 5 */
-    100% 50%;   /* 6 */
-  background-repeat: no-repeat;
+    50% 50%,
+    45% 55%,
+    55% 45%,
+    50% 60%,
+    60% 50%,
+    40% 50%;
 
-  /* NOTE: fixed can break animation on Safari/iOS; keep disabled */
-  /* background-attachment: fixed; */
-
+  background-repeat:no-repeat;
   will-change: background-position;
-  animation: cosmicLayers 5s ease-in-out infinite alternate;
+  animation: cosmicPan 8s linear infinite alternate; /* speed up/slow down here */
 }
 
-@keyframes cosmicLayers{
+@keyframes cosmicPan{
   0%{
     background-position:
-      0%   0%,
-      80%  10%,
-      0%   40%,
-      100% 0%,
-      0%   60%,
-      100% 50%;
-  }
-  50%{
-    background-position:
-      200% 100%,  /* exaggerated motion */
-      -50%  0%,
-      150% 120%,
-      -100% 40%,
-      200% 20%,
-      -50%  90%;
+      40% 40%,
+      60% 45%,
+      45% 60%,
+      55% 35%,
+      35% 55%,
+      60% 40%;
   }
   100%{
     background-position:
-      0%   200%,
-      150% -50%,
-      -50%  10%,
-      200% 200%,
-      -100% 30%,
-      150% -50%;
+      60% 60%,
+      40% 55%,
+      55% 40%,
+      45% 65%,
+      65% 45%,
+      40% 60%;
   }
+}
+
+/* Soft vignette to mask any seams and add depth */
+body.site::before{
+  content:"";
+  position:fixed; inset:0;
+  pointer-events:none; z-index:0;
+  background: radial-gradient(120% 120% at 50% 50%,
+              transparent 30%,
+              rgba(0,0,0,.28) 78%,
+              rgba(0,0,0,.5) 100%);
 }
 
 /* ========== Header ========== */
