@@ -32,7 +32,26 @@ html, body{ margin:0; }
 
 /* ========== Body / Layout ========== */
 /* use BODY when it has class="site" */
-/* ✨ Cosmic background with multi-layer parallax + subtle rotation */
+
+/* A soft rotating sheen on top of the same background */
+body.site::before{
+  content:"";
+  position:fixed; inset:-15%;
+  z-index:-1;                /* behind content */
+  pointer-events:none;
+  opacity:.35;
+  filter: blur(36px);
+  mix-blend-mode: screen;
+  background:
+    radial-gradient(closest-side, rgba(255,16,240,.22), transparent 70%) 40% 40% / 60% 60% no-repeat,
+    radial-gradient(closest-side, rgba(0,140,255,.18),  transparent 70%) 60% 60% / 55% 55% no-repeat,
+    radial-gradient(closest-side, rgba(20,175,125,.18), transparent 70%) 50% 50% / 70% 70% no-repeat;
+  transform-origin: 50% 50%;
+  animation: sheenSpin 60s linear infinite;
+}
+@keyframes sheenSpin { to { transform: rotate(360deg); } }
+
+
 body.site{
   min-height:100svh;
   display:flex;
