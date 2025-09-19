@@ -32,40 +32,71 @@ html, body{ margin:0; }
 
 /* ========== Body / Layout ========== */
 /* use BODY when it has class="site" */
-/* Cosmic gradient that slowly drifts (with solid fallback + Safari-friendly defaults) */
+/* ✨ Cosmic background with multi-layer parallax + subtle rotation */
 body.site{
   min-height:100svh;
   display:flex;
   flex-direction:column;
-  color:var(--white);
+  color:#fff;
 
-  /* fallback behind blends (prevents white flash) */
+  /* solid fallback to avoid white flashes */
   background-color:#000;
 
+  /* the same layers you have now */
   background-image:
     linear-gradient(115deg, rgb(211 255 215), rgb(0 0 0)),
-    radial-gradient(90% 100% at 50% 0%, rgb(200 200 200), rgb(22 0 45)),
-    radial-gradient(100% 100% at 80% 0%, rgb(250 255 0), rgb(36 0 0)),
+    radial-gradient( 90% 100% at 50% 0%,  rgb(200 200 200), rgb(22 0 45)),
+    radial-gradient(100% 100% at 80% 0%,  rgb(250 255 0),  rgb(36 0 0)),
     radial-gradient(150% 210% at 100% 0%, rgb(20 175 125), rgb(0 10 255)),
-    radial-gradient(100% 100% at 100% 30%, rgb(255 77 0), rgb(0 200 255)),
+    radial-gradient(100% 100% at 100% 30%, rgb(255 77 0),  rgb(0 200 255)),
     linear-gradient(60deg, rgb(255 0 0), rgb(120 86 255));
   background-blend-mode: overlay, overlay, difference, difference, difference, normal;
 
-  /* important defaults for consistent rendering */
-  background-repeat: no-repeat;
-  /*background-size: 200% 200%;*/
-  background-position: 0% 0%;
-  /* optional: keeps the background pinned while content scrolls */
-  background-attachment: fixed;
+  /* give layers different scales so motion feels dimensional */
+  background-size:
+    220% 220%,   /* layer 1 */
+    180% 180%,   /* layer 2 */
+    160% 160%,   /* layer 3 */
+    200% 200%,   /* layer 4 */
+    180% 180%,   /* layer 5 */
+    200% 200%;   /* layer 6 */
 
-  /* gentle drift */
-  animation: cosmicShift 15s ease-in-out infinite alternate;
+  background-repeat: no-repeat;
+  background-attachment: fixed;     /* looks great with big drifts */
+
+  /* multi-layer parallax drift (faster + cooler than a simple fade) */
+  animation: cosmicLayers 28s ease-in-out infinite alternate;
 }
 
-@keyframes cosmicShift{
-  0%   { background-position: 0%   0%; }
-  50%  { background-position: 100% 50%; }
-  100% { background-position: 0% 100%; }
+/* Keyframes set a *list* of positions, one per background layer. */
+@keyframes cosmicLayers{
+  0%{
+    background-position:
+      0%   0%,   /* 1 */
+      80%  10%,  /* 2 */
+      0%   40%,  /* 3 */
+      100% 0%,   /* 4 */
+      0%   60%,  /* 5 */
+      100% 50%;  /* 6 */
+  }
+  50%{
+    background-position:
+      100% 50%,
+      20%  0%,
+      100% 70%,
+      0%   20%,
+      100% 0%,
+      0%   80%;
+  }
+  100%{
+    background-position:
+      0%   100%,
+      70%  0%,
+      0%   10%,
+      100% 100%,
+      0%   30%,
+      100% 0%;
+  }
 }
 
 /* ========== Header ========== */
