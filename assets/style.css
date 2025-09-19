@@ -31,9 +31,7 @@ html, body{ margin:0; }
 .wrap{ max-width:var(--max); margin:0 auto; padding:0 22px; }
 
 /* ========== Body / Layout ========== */
-/* use BODY when it has class="site" */
-
-/* BACKGROUND with multi-layer parallax that actually animates */
+/* use BODY when it has class="site" */ 
 body.site{
   min-height:100svh;
   display:flex;
@@ -51,22 +49,13 @@ body.site{
     linear-gradient(60deg, rgb(255 0 0), rgb(120 86 255));
   background-blend-mode: overlay, overlay, difference, difference, difference, normal;
 
-  /* important: initial sizes + positions for ALL layers */
- background-size:
-    120% 120%,  /* layer 1 */
-    110% 110%,  /* layer 2 */
-    130% 130%,  /* layer 3 */
-    140% 140%,  /* layer 4 */
-    120% 120%,  /* layer 5 */
-    140% 140%;  /* layer 6 */
-  
+  /* Safer canvas + starting positions (prevents showing edges) */
+  background-size:
+    200% 200%, 200% 200%, 200% 200%,
+    200% 200%, 200% 200%, 200% 200%;
   background-position:
-    0%   0%,   /* 1 */
-    80%  10%,  /* 2 */
-    0%   40%,  /* 3 */
-    100% 0%,   /* 4 */
-    0%   60%,  /* 5 */
-    100% 50%;  /* 6 */
+    50% 50%, 45% 55%, 55% 45%,
+    50% 60%, 60% 50%, 40% 50%;
 
   background-repeat: no-repeat;
 
@@ -77,33 +66,17 @@ body.site{
   animation: cosmicLayers 5s ease-in-out infinite alternate;
 }
 
+
 @keyframes cosmicLayers{
   0%{
     background-position:
-      0%   0%,
-      80%  10%,
-      0%   40%,
-      100% 0%,
-      0%   60%,
-      100% 50%;
-  }
-  50%{
-    background-position:
-      200% 100%,  /* exaggerate movement */
-      -50%  0%,
-      150% 120%,
-      -100% 40%,
-      200% 20%,
-      -50%  90%;
+      42% 42%, 58% 45%, 45% 58%,
+      55% 38%, 38% 55%, 58% 42%;
   }
   100%{
     background-position:
-      0%   200%,
-      150% -50%,
-      -50%  10%,
-      200% 200%,
-      -100% 30%,
-      150% -50%;
+      58% 58%, 42% 55%, 55% 42%,
+      45% 62%, 62% 45%, 42% 58%;
   }
 }
 
