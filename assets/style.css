@@ -16,23 +16,21 @@ html, body{ margin:0; }
   font-weight:450;
   font-size:2rem;
   letter-spacing:.7px;
-  display:block;         /* makes sure it sits above tagline */
+  display:block; /* stacks above tagline */
 }
 
 /* tagline below logo */
 .tagline {
-  font-family:'Bitcount Grid Double', sans-serif; /* same font */
-  font-size:0.9rem;        /* smaller size */
-  font-weight:300;         /* lighter */
-  margin:4px 0 0;          /* small space below Funky Earth */
-  color:#ccc;              /* optional lighter color */
+  font-family:'Bitcount Grid Double', sans-serif;
+  font-size:0.9rem;
+  font-weight:300;
+  margin:4px 0 0;
+  color:#ccc;
 }
 
 .wrap{ max-width:var(--max); margin:0 auto; padding:0 22px; }
 
 /* ========== Body / Layout ========== */
-/* use BODY when it has class="site" */
-
 /* BACKGROUND with multi-layer parallax that actually animates */
 body.site{
   min-height:100svh;
@@ -51,26 +49,24 @@ body.site{
     linear-gradient(60deg, rgb(255 0 0), rgb(120 86 255));
   background-blend-mode: overlay, overlay, difference, difference, difference, normal;
 
-  /* important: initial sizes + positions for ALL layers */
- background-size:
-    120% 120%,  /* layer 1 */
-    110% 110%,  /* layer 2 */
-    130% 130%,  /* layer 3 */
-    140% 140%,  /* layer 4 */
-    120% 120%,  /* layer 5 */
-    140% 140%;  /* layer 6 */
-  
+  /* initial sizes + positions for ALL layers */
+  background-size:
+    120% 120%,  /* 1 */
+    110% 110%,  /* 2 */
+    130% 130%,  /* 3 */
+    140% 140%,  /* 4 */
+    120% 120%,  /* 5 */
+    140% 140%;  /* 6 */
   background-position:
-    0%   0%,   /* 1 */
-    80%  10%,  /* 2 */
-    0%   40%,  /* 3 */
-    100% 0%,   /* 4 */
-    0%   60%,  /* 5 */
-    100% 50%;  /* 6 */
-
+    0%   0%,    /* 1 */
+    80%  10%,   /* 2 */
+    0%   40%,   /* 3 */
+    100% 0%,    /* 4 */
+    0%   60%,   /* 5 */
+    100% 50%;   /* 6 */
   background-repeat: no-repeat;
 
-  /* NOTE: fixed can break animation on Safari/iOS; disable for reliable motion */
+  /* NOTE: fixed can break animation on Safari/iOS; keep disabled */
   /* background-attachment: fixed; */
 
   will-change: background-position;
@@ -89,7 +85,7 @@ body.site{
   }
   50%{
     background-position:
-      200% 100%,  /* exaggerate movement */
+      200% 100%,  /* exaggerated motion */
       -50%  0%,
       150% 120%,
       -100% 40%,
@@ -159,10 +155,14 @@ nav a:hover{ color:var(--pink); }
   max-width:var(--max); padding:40px 22px;
 }
 
-/* LATEST circle */
+/* ========== Rotating 'JOIN WEEKLY NEWSLETTER' circle ========== */
 .latest-circle-wrap{ position:absolute; z-index:2; pointer-events:none; }
 .latest-circle-wrap.top-left{ top:22px; left:22px; }
-.latest-circle{ animation: latest-rotate 24s linear infinite; }
+
+/* make sure we can absolutely center the button */
+.latest-circle{ position:relative; animation: latest-rotate 24s linear infinite; }
+
+/* only the ring text shows; no extra join copy elsewhere */
 .ring-text{
   font-family:'Bitcount Grid Double', sans-serif; font-weight:600; font-size:20px;
   animation: latest-color 18s linear infinite;
@@ -175,77 +175,45 @@ nav a:hover{ color:var(--pink); }
   100%{ fill:#ffffff; }
 }
 
-/* Hero headings */
-.hero-title{
-  font-family:'Bitcount Grid Double', sans-serif;
-  font-size: clamp(1.8rem, 4vw, 2.6rem);
-  margin:0 0 8px 0;
+/* Center the mail button inside the ring and keep it clickable */
+.mail-btn{
+  position:absolute; top:50%; left:50%; transform:translate(-50%,-50%);
+  background:none; border:none; cursor:pointer; z-index:5;
+  pointer-events:auto;                 /* clickable even though wrapper is not */
 }
-.hero-tag{ margin:0; color:#e8e8ea; }
+.mail-btn img{ width:60px; transition:transform .2s ease; }
+.mail-btn:hover img{ transform:scale(1.2); }
 
-/* Center button inside circle */
-.mail-btn {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  background: none;
-  border: none;
-  cursor: pointer;
-  z-index: 5;
+/* ========== Popup modal (no extra visible headings/copy) ========== */
+.newsletter-modal{
+  display:none; position:fixed; inset:0;
+  background:rgba(0,0,0,0.8);
+  justify-content:center; align-items:center;
+  z-index:2000;
 }
-.mail-btn img {
-  width: 60px;
-  transition: transform 0.2s ease;
+.modal-content{
+  background:#111; color:#fff; padding:30px;
+  border-radius:12px; max-width:400px; width:90%;
+  text-align:center; box-shadow:0 0 20px rgba(255,105,180,0.6);
+  position:relative;
 }
-.mail-btn:hover img {
-  transform: scale(1.2);
-}
+/* hide visible text so only the ring advertises the newsletter */
+.newsletter-modal .modal-content h2,
+.newsletter-modal .modal-content p{ display:none; }
 
-/* Popup modal */
-.newsletter-modal {
-  display: none;
-  position: fixed;
-  inset: 0;
-  background: rgba(0,0,0,0.8);
-  justify-content: center;
-  align-items: center;
-  z-index: 2000;
+.modal-content input{
+  width:100%; padding:10px; margin-top:12px;
+  border:none; border-radius:6px; font-size:1rem;
 }
-.modal-content {
-  background: #111;
-  color: #fff;
-  padding: 30px;
-  border-radius: 12px;
-  max-width: 400px;
-  width: 90%;
-  text-align: center;
-  box-shadow: 0 0 20px rgba(255,105,180,0.6);
+.modal-content button{
+  margin-top:14px; padding:10px;
+  background:#FF69B4; border:none; border-radius:6px;
+  color:#fff; font-weight:bold; cursor:pointer;
 }
-.modal-content input {
-  width: 100%;
-  padding: 10px;
-  margin-top: 12px;
-  border: none;
-  border-radius: 6px;
-}
-.modal-content button {
-  margin-top: 14px;
-  padding: 10px;
-  background: #FF69B4;
-  border: none;
-  border-radius: 6px;
-  color: #fff;
-  font-weight: bold;
-  cursor: pointer;
-}
-.modal-content button:hover {
-  background: #D10072;
-}
-.close-btn {
-  float: right;
-  font-size: 1.5rem;
-  cursor: pointer;
+.modal-content button:hover{ background:#D10072; }
+.close-btn{
+  position:absolute; top:10px; right:12px;
+  background:none; border:0; color:#fff; font-size:1.5rem; cursor:pointer;
 }
 
 /* ========== Footer ========== */
@@ -263,5 +231,3 @@ footer{
   body.site{ animation:none; }
   .logo-text, nav a, .latest-circle{ animation:none; transition:none; }
 }
-
-
