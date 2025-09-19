@@ -35,13 +35,13 @@ body.site{
 
   /* important defaults for consistent rendering */
   background-repeat: no-repeat;
-  /*background-size: 200% 200%;
+  /*background-size: 200% 200%;*/
   background-position: 0% 0%;
   /* optional: keeps the background pinned while content scrolls */
   background-attachment: fixed;
 
   /* gentle drift */
-  animation: cosmicShift 60s ease-in-out infinite alternate;
+  animation: cosmicShift 30s ease-in-out infinite alternate;
 }
 
 @keyframes cosmicShift{
