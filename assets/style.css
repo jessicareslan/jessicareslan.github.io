@@ -47,7 +47,7 @@ body.site::before{
     radial-gradient(closest-side, rgba(0,140,255,.18),  transparent 70%) 60% 60% / 55% 55% no-repeat,
     radial-gradient(closest-side, rgba(20,175,125,.18), transparent 70%) 50% 50% / 70% 70% no-repeat;
   transform-origin: 50% 50%;
-  animation: sheenSpin 60s linear infinite;
+  animation: sheenSpin 30s linear infinite;
 }
 @keyframes sheenSpin { to { transform: rotate(360deg); } }
 
