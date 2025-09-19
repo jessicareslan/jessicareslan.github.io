@@ -37,27 +37,63 @@
     </nav>
   </header>
 
+  <!-- Newsletter Button -->
+<div class="newsletter-section">
+  <button class="newsletter-btn" id="openNewsletter">
+    <img src="assets/images/cute-mail.png" alt="Join Newsletter" />
+    <span>Join the Newsletter</span>
+  </button>
+</div>
+
+<!-- Popup Modal -->
+<div class="newsletter-modal" id="newsletterModal">
+  <div class="modal-content">
+    <span class="close-btn" id="closeNewsletter">&times;</span>
+    <h2>Join the Funky Earth Newsletter</h2>
+    <p>Get weekly updates, vibes, and cool stories straight to your inbox 🌍✨</p>
+    <form id="newsletterForm">
+      <input type="email" placeholder="Your email address" required />
+      <button type="submit">Subscribe</button>
+    </form>
+  </div>
+</div>
+
   <!-- Hero (background is on BODY; hero is a content canvas) -->
   <section class="hero-banner">
     <div class="overlay">
-      <!-- Spinning LATEST circle, pinned to a corner -->
-      <div class="latest-circle-wrap top-left" aria-hidden="true">
-        <div class="latest-circle">
-          <svg viewBox="0 0 200 200" width="160" height="160">
-            <defs>
-              <path id="latest-circle-path"
-                d="M100,100 m-75,0 a75,75 0 1,1 150,0 a75,75 0 1,1 -150,0" />
-            </defs>
-            <text class="ring-text" letter-spacing="3">
-              <textPath href="#latest-circle-path" startOffset="0%">
-                • JOIN WEEKLY NEWSLETTER •
-              </textPath>
-            </text>
-          </svg>
-        </div>
-      </div>
+     <div class="latest-circle-wrap top-left" aria-hidden="false">
+  <div class="latest-circle">
+    <svg viewBox="0 0 200 200" width="160" height="160">
+      <defs>
+        <path id="latest-circle-path"
+          d="M100,100 m-75,0 a75,75 0 1,1 150,0 a75,75 0 1,1 -150,0" />
+      </defs>
+      <text class="ring-text" letter-spacing="3">
+        <textPath href="#latest-circle-path" startOffset="0%">
+          • JOIN WEEKLY NEWSLETTER •
+        </textPath>
+      </text>
+    </svg>
 
-    </div>
+    <!-- 💌 Button in center -->
+    <button class="mail-btn" id="openNewsletter">
+      <img src="assets/images/cute-mail.png" alt="Join Newsletter" />
+    </button>
+  </div>
+</div>
+
+<!-- Popup Modal -->
+<div class="newsletter-modal" id="newsletterModal">
+  <div class="modal-content">
+    <span class="close-btn" id="closeNewsletter">&times;</span>
+    <h2>Join the Funky Earth Newsletter</h2>
+    <form id="newsletterForm">
+      <input type="email" placeholder="Your email address" required />
+      <button type="submit">Subscribe</button>
+    </form>
+  </div>
+</div>
+      
   </section>
 
   <main class="wrap" id="articles" role="main">
