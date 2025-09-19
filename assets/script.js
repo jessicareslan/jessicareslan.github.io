@@ -26,5 +26,26 @@
   });
 })();
 
+// Newsletter popup
+const openBtn = document.getElementById("openNewsletter");
+const modal = document.getElementById("newsletterModal");
+const closeBtn = document.getElementById("closeNewsletter");
 
+openBtn.addEventListener("click", () => {
+  modal.style.display = "flex";
+});
+
+closeBtn.addEventListener("click", () => {
+  modal.style.display = "none";
+});
+
+window.addEventListener("click", (e) => {
+  if (e.target === modal) modal.style.display = "none";
+});
+
+document.getElementById("newsletterForm").addEventListener("submit", (e) => {
+  e.preventDefault();
+  alert("💌 Thanks for subscribing!");
+  modal.style.display = "none";
+});
 
