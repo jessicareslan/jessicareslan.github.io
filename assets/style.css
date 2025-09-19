@@ -160,7 +160,7 @@ nav a:hover{ color:var(--pink); }
 }
 
 /* LATEST circle */
-.latest-circle-wrap{ position:absolute; z-index:2; pointer-events:none; }
+.latest-circle-wrap{ position:absolute; z-index:2; }
 .latest-circle-wrap.top-left{ top:22px; left:22px; }
 .latest-circle{ animation: latest-rotate 24s linear infinite; }
 .ring-text{
