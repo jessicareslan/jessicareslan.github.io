@@ -10,6 +10,24 @@
 *{ box-sizing:border-box; }
 html, body{ margin:0; }
 
+/* main logo text */
+.logo-text {
+  font-family:'Bitcount Grid Double', sans-serif;
+  font-weight:450;
+  font-size:2rem;
+  letter-spacing:.7px;
+  display:block;         /* makes sure it sits above tagline */
+}
+
+/* tagline below logo */
+.tagline {
+  font-family:'Bitcount Grid Double', sans-serif; /* same font */
+  font-size:0.9rem;        /* smaller size */
+  font-weight:300;         /* lighter */
+  margin:4px 0 0;          /* small space below Funky Earth */
+  color:#ccc;              /* optional lighter color */
+}
+
 .wrap{ max-width:var(--max); margin:0 auto; padding:0 22px; }
 
 /* ========== Body / Layout ========== */
