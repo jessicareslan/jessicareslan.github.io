@@ -158,12 +158,29 @@ nav a:hover{ color:var(--pink); }
 .hero-tag{ margin:0; color:#e8e8ea; }
 
 /* Mail button centered; re-enable pointer events just in case 
-.mail-btn{
-  position:absolute; top:50%; left:50%; transform:translate(-50%,-50%);
-  background:none; border:none; cursor:pointer; pointer-events:auto;
+/* Center button inside circle */
+.mail-btn {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%); /* dead center */
+  background: none;   /* remove background */
+  border: none;       /* remove border */
+  padding: 0;         /* remove extra padding */
+  cursor: pointer;
+  z-index: 5;
 }
-.mail-btn img{ width:60px; height:auto; display:block; transition:transform .2s; }
-.mail-btn:hover img{ transform:scale(1.2); } */
+
+.mail-btn img {
+  width: 70px; /* adjust size */
+  height: auto;
+  display: block;
+  transition: transform 0.25s ease;
+}
+
+.mail-btn:hover img {
+  transform: scale(1.2); /* subtle grow on hover */
+}
 
 .newsletter-modal {
   display: none; /* hidden by default */
