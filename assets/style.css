@@ -32,7 +32,7 @@ html, body{ margin:0; }
 
 /* ========== Body / Layout ========== */
 /* use BODY when it has class="site" */ 
-body{
+body.site{
   overflow: hidden;
   margin:0;
 }
