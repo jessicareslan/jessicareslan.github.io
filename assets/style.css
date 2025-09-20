@@ -168,7 +168,7 @@ nav a:hover{ color:var(--pink); }
   border: none;       /* remove border */
   padding: 0;         /* remove extra padding */
   cursor: pointer;
-  z-index: 5;
+  z-index: 10;
 }
 
 .mail-btn img {
