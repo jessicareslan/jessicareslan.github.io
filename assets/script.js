@@ -51,3 +51,4 @@ form.addEventListener("submit", (e) => {
   alert("💌 Thanks for subscribing!");
   modal.style.display = "none";
 });
+
