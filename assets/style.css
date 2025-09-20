@@ -157,13 +157,63 @@ nav a:hover{ color:var(--pink); }
 }
 .hero-tag{ margin:0; color:#e8e8ea; }
 
-/* Mail button centered; re-enable pointer events just in case */
+/* Mail button centered; re-enable pointer events just in case 
 .mail-btn{
   position:absolute; top:50%; left:50%; transform:translate(-50%,-50%);
   background:none; border:none; cursor:pointer; pointer-events:auto;
 }
 .mail-btn img{ width:60px; height:auto; display:block; transition:transform .2s; }
-.mail-btn:hover img{ transform:scale(1.2); }
+.mail-btn:hover img{ transform:scale(1.2); } */
+
+.newsletter-modal {
+  display: none; /* hidden by default */
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.8);
+  justify-content: center;
+  align-items: center;
+  z-index: 2000;
+}
+
+.modal-content {
+  background: #111;
+  color: #fff;
+  padding: 30px;
+  border-radius: 12px;
+  max-width: 400px;
+  width: 90%;
+  text-align: center;
+  box-shadow: 0 0 20px rgba(255,105,180,0.6);
+}
+
+.modal-content input {
+  width: 100%;
+  padding: 10px;
+  margin-top: 12px;
+  border: none;
+  border-radius: 6px;
+}
+
+.modal-content button {
+  margin-top: 14px;
+  padding: 10px;
+  background: #FF69B4;
+  border: none;
+  border-radius: 6px;
+  color: #fff;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.modal-content button:hover {
+  background: #D10072;
+}
+
+.close-btn {
+  float: right;
+  font-size: 1.5rem;
+  cursor: pointer;
+}
 
 /* ========== Footer ========== */
 main{ flex:1; } /* push footer down */
