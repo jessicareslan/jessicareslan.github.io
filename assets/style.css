@@ -37,8 +37,7 @@ body.site{
   display:flex;
   flex-direction:column;
   color:#fff;
-
-  background-color:#000; /* fallback */
+  background-color:#000;
 
   background-image:
     linear-gradient(115deg, rgb(211 255 215), rgb(0 0 0)),
@@ -48,60 +47,37 @@ body.site{
     radial-gradient(100% 100% at 100% 30%, rgb(255 77 0),  rgb(0 200 255)),
     linear-gradient(60deg, rgb(255 0 0), rgb(120 86 255));
   background-blend-mode: overlay, overlay, difference, difference, difference, normal;
-
-  /* important: initial sizes + positions for ALL layers */
- background-size:
-    120% 120%,  /* layer 1 */
-    110% 110%,  /* layer 2 */
-    130% 130%,  /* layer 3 */
-    140% 140%,  /* layer 4 */
-    120% 120%,  /* layer 5 */
-    140% 140%;  /* layer 6 */
-  
-  background-position:
-    0%   0%,   /* 1 */
-    80%  10%,  /* 2 */
-    0%   40%,  /* 3 */
-    100% 0%,   /* 4 */
-    0%   60%,  /* 5 */
-    100% 50%;  /* 6 */
-
   background-repeat: no-repeat;
 
-  /* NOTE: fixed can break animation on Safari/iOS; disable for reliable motion */
-  /* background-attachment: fixed; */
+  /* bigger canvases to hide edges */
+  background-size:
+    240% 240%,
+    240% 240%,
+    240% 240%,
+    240% 240%,
+    240% 240%,
+    240% 240%;
 
+  /* start near center to reduce edge exposure */
+  background-position:
+    50% 50%, 48% 52%, 52% 48%,
+    50% 56%, 56% 50%, 44% 50%;
+
+  /* smoother motion */
+  animation: cosmicSmooth 10s linear infinite alternate;
   will-change: background-position;
-  animation: cosmicLayers 5s ease-in-out infinite alternate;
 }
 
-@keyframes cosmicLayers{
+@keyframes cosmicSmooth{
   0%{
     background-position:
-      0%   0%,
-      80%  10%,
-      0%   40%,
-      100% 0%,
-      0%   60%,
-      100% 50%;
-  }
-  50%{
-    background-position:
-      200% 100%,  /* exaggerate movement */
-      -50%  0%,
-      150% 120%,
-      -100% 40%,
-      200% 20%,
-      -50%  90%;
+      45% 45%, 55% 47%, 47% 55%,
+      53% 42%, 42% 53%, 58% 45%;
   }
   100%{
     background-position:
-      0%   200%,
-      150% -50%,
-      -50%  10%,
-      200% 200%,
-      -100% 30%,
-      150% -50%;
+      55% 55%, 45% 53%, 53% 45%,
+      47% 58%, 58% 47%, 42% 55%;
   }
 }
 
