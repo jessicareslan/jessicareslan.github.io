@@ -19,6 +19,7 @@ html, body{ margin:0; }
   display:block;         /* makes sure it sits above tagline */
 }
 
+
 /* tagline below logo */
 .tagline {
   font-family:'Bitcount Grid Double', sans-serif; /* same font */
@@ -138,7 +139,7 @@ nav a:hover{ color:var(--pink); }
 .latest-circle-wrap.top-left{ top:22px; left:22px; }
 .latest-circle{ animation: latest-rotate 24s linear infinite; }
 .ring-text{
-  font-family:'Bitcount Grid Double', sans-serif; font-weight:600; font-size:20px;
+  font-family:'Bitcount Grid Double', sans-serif; font-weight:400; font-size:20px;
   animation: latest-color 18s linear infinite;
 }
 @keyframes latest-rotate{ to { transform: rotate(360deg); } }
