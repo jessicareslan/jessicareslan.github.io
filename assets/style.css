@@ -33,68 +33,86 @@ html, body{ margin:0; }
 
 /* ========== Body / Layout ========== */
 /* ==== NEBULA BACKGROUND (super colorful + lots of motion) ==== */
+/* ===================== */
+/* HYPER-NEBULA BACKGROUND */
+/* ===================== */
+
+:root{
+  /* quick knobs you can tweak */
+  --nebula-speed: 12s;   /* lower = faster */
+  --nebula-sat: 120%;    /* overall saturation */
+  --nebula-grain: .14;   /* grain strength */
+}
+
 body.site{
   min-height:100svh;
   display:flex;
   flex-direction:column;
   color:#fff;
-  background:#000;                 /* fallback */
+  background:#000;
 
-  /* Core color layers (big gradients) */
+  /* 6 large, soft blobs. Transparent edges to avoid banding */
   background-image:
-    radial-gradient(120% 120% at 15% 10%,  #2153FF 0%,   rgba(33,83,255,0) 60%),  /* electric blue */
-    radial-gradient(120% 120% at 85% 10%,  #A100FF 0%,   rgba(161,0,255,0) 60%),  /* violet */
-    radial-gradient(120% 140% at 60% 45%,  #FF2DA1 0%,   rgba(255,45,161,0) 65%), /* hot magenta */
-    radial-gradient(140% 140% at 55% 70%,  #FF6A3D 0%,   rgba(255,106,61,0) 65%), /* coral */
-    radial-gradient(140% 140% at 35% 90%,  #FFC27A 0%,   rgba(255,194,122,0) 65%),/* peach */
-    radial-gradient(160% 160% at 95% 85%,  #7AA2FF 0%,   rgba(122,162,255,0) 60%);/* periwinkle */
+    radial-gradient(120% 120% at 15% 20%,   hsla(220,90%,60%,.95),  transparent 65%), /* electric blue */
+    radial-gradient(110% 120% at 85% 18%,   hsla(12, 95%,60%,.90),  transparent 60%), /* orange-red */
+    radial-gradient(120% 140% at 55% 45%,   hsla(295,85%,62%,.90),  transparent 65%), /* magenta */
+    radial-gradient(130% 140% at 30% 80%,   hsla(50, 95%,65%,.85),  transparent 70%), /* lemon */
+    radial-gradient(140% 160% at 78% 75%,   hsla(190,85%,60%,.85),  transparent 70%), /* aqua */
+    radial-gradient(150% 160% at 50% 55%,   hsla(260,85%,65%,.85),  transparent 72%); /* violet */
 
-  /* Blend & scale so we can move a lot without exposing edges */
   background-blend-mode: screen, screen, screen, screen, screen, screen;
+
+  /* scale up so we can pan a LOT without edges showing */
   background-size: 260% 260%, 260% 260%, 260% 260%, 260% 260%, 260% 260%, 260% 260%;
-  background-position: 40% 40%, 60% 35%, 55% 50%, 60% 75%, 45% 90%, 80% 80%;
+  background-position: 40% 40%, 65% 25%, 50% 55%, 30% 85%, 80% 70%, 55% 50%;
 
-  /* Big movement */
-  animation: nebulaDrift 9s linear infinite alternate;
-  will-change: background-position;
-  position: relative;
-  overflow-x: clip;
+  /* big smooth drift + size changes for “breathing” blobs */
+  animation: nebulaPan var(--nebula-speed) ease-in-out infinite alternate,
+             nebulaPulse calc(var(--nebula-speed) * 1.2) ease-in-out infinite alternate;
+  filter: saturate(var(--nebula-sat));
+  will-change: background-position, background-size, filter;
+  overflow-x: clip; /* avoids tiny subpixel seams */
 }
 
-/* Swirling glow layer (separate, rotates for extra drama) */
-body.site {
-  min-height: 100svh;
-  display: flex;
-  flex-direction: column;
-  color: #fff;
-  background: #000;
-
-  background-image:
-    radial-gradient(circle at 20% 30%, hsla(200, 100%, 60%, 0.8), transparent 70%),
-    radial-gradient(circle at 80% 20%, hsla(300, 80%, 65%, 0.8), transparent 70%),
-    radial-gradient(circle at 50% 70%, hsla(340, 90%, 60%, 0.8), transparent 70%),
-    radial-gradient(circle at 30% 90%, hsla(50, 100%, 65%, 0.7), transparent 80%),
-    radial-gradient(circle at 70% 80%, hsla(120, 80%, 55%, 0.7), transparent 75%);
-
-  background-blend-mode: screen, screen, lighten, lighten, screen;
-  background-size: 200% 200%;
-  background-position: 50% 50%;
-  animation: nebulaFlow 15s ease-in-out infinite alternate;
+/* slow hue rotation to keep colors evolving */
+@keyframes nebulaPulse{
+  0%   { background-size: 240% 240%, 230% 230%, 250% 250%, 240% 240%, 240% 240%, 240% 240%; filter: hue-rotate(0deg) saturate(var(--nebula-sat)); }
+  50%  { background-size: 280% 280%, 250% 250%, 220% 220%, 270% 270%, 230% 230%, 260% 260%; filter: hue-rotate(40deg) saturate(calc(var(--nebula-sat) * 1.05)); }
+  100% { background-size: 260% 260%, 260% 260%, 260% 260%, 260% 260%, 260% 260%, 260% 260%; filter: hue-rotate(80deg) saturate(var(--nebula-sat)); }
 }
 
-@keyframes nebulaFlow {
-  0% {
-    background-position: 20% 30%, 80% 20%, 50% 70%, 30% 90%, 70% 80%;
-    background-size: 180% 180%, 160% 160%, 200% 200%, 180% 180%, 200% 200%;
+@keyframes nebulaPan{
+  0%{
+    background-position:  30% 30%,  90% 15%,  45% 55%,  20% 90%,  85% 70%,  55% 40%;
   }
-  50% {
-    background-position: 80% 70%, 40% 50%, 60% 30%, 20% 80%, 90% 40%;
-    background-size: 220% 220%, 200% 200%, 160% 160%, 210% 210%, 180% 180%;
+  50%{
+    background-position: 120% 60%, -20% 45%,  80% 20%,  10% 60%, 140% 30%,  20% 85%;
   }
-  100% {
-    background-position: 40% 60%, 20% 80%, 70% 40%, 50% 20%, 30% 70%;
-    background-size: 200% 200%, 180% 180%, 220% 220%, 190% 190%, 210% 210%;
+  100%{
+    background-position:   0% 120%, 150% -10%, 10%  0%,  60% 10%,  -10% 90%, 130%  0%;
   }
+}
+
+/* soft animated grain so it feels organic (cheap GPU) */
+body.site::after{
+  content:"";
+  position:fixed; inset:0;
+  z-index:-1; pointer-events:none;
+  opacity: var(--nebula-grain);
+  mix-blend-mode: soft-light;
+  background:
+    repeating-conic-gradient(from 0deg,
+      rgba(255,255,255,.035) 0 2deg,
+      rgba(0,0,0,.035)        2deg 4deg);
+  background-size: 280% 280%;
+  animation: grainDrift calc(var(--nebula-speed) * .7) linear infinite;
+}
+@keyframes grainDrift{ to{ background-position: 200% 200%; } }
+
+/* motion preference */
+@media (prefers-reduced-motion: reduce){
+  body.site{ animation:none; }
+  body.site::after{ animation:none; }
 }
 
 /* ========== Header ========== */
