@@ -31,88 +31,19 @@ html, body{ margin:0; }
 
 .wrap{ max-width:var(--max); margin:0 auto; padding:0 22px; }
 
-/* ========== Body / Layout ========== */
-/* ==== NEBULA BACKGROUND (super colorful + lots of motion) ==== */
-/* ===================== */
-/* HYPER-NEBULA BACKGROUND */
-/* ===================== */
-
-:root{
-  /* quick knobs you can tweak */
-  --nebula-speed: 12s;   /* lower = faster */
-  --nebula-sat: 120%;    /* overall saturation */
-  --nebula-grain: .14;   /* grain strength */
-}
-
-body.site{
-  min-height:100svh;
-  display:flex;
-  flex-direction:column;
-  color:#fff;
-  background:#000;
-
-  /* 6 large, soft blobs. Transparent edges to avoid banding */
-  background-image:
-    radial-gradient(120% 120% at 15% 20%,   hsla(220,90%,60%,.95),  transparent 65%), /* electric blue */
-    radial-gradient(110% 120% at 85% 18%,   hsla(12, 95%,60%,.90),  transparent 60%), /* orange-red */
-    radial-gradient(120% 140% at 55% 45%,   hsla(295,85%,62%,.90),  transparent 65%), /* magenta */
-    radial-gradient(130% 140% at 30% 80%,   hsla(50, 95%,65%,.85),  transparent 70%), /* lemon */
-    radial-gradient(140% 160% at 78% 75%,   hsla(190,85%,60%,.85),  transparent 70%), /* aqua */
-    radial-gradient(150% 160% at 50% 55%,   hsla(260,85%,65%,.85),  transparent 72%); /* violet */
-
-  background-blend-mode: screen, screen, screen, screen, screen, screen;
-
-  /* scale up so we can pan a LOT without edges showing */
-  background-size: 260% 260%, 260% 260%, 260% 260%, 260% 260%, 260% 260%, 260% 260%;
-  background-position: 40% 40%, 65% 25%, 50% 55%, 30% 85%, 80% 70%, 55% 50%;
-
-  /* big smooth drift + size changes for “breathing” blobs */
-  animation: nebulaPan var(--nebula-speed) ease-in-out infinite alternate,
-             nebulaPulse calc(var(--nebula-speed) * 1.2) ease-in-out infinite alternate;
-  filter: saturate(var(--nebula-sat));
-  will-change: background-position, background-size, filter;
-  overflow-x: clip; /* avoids tiny subpixel seams */
-}
-
-/* slow hue rotation to keep colors evolving */
-@keyframes nebulaPulse{
-  0%   { background-size: 240% 240%, 230% 230%, 250% 250%, 240% 240%, 240% 240%, 240% 240%; filter: hue-rotate(0deg) saturate(var(--nebula-sat)); }
-  50%  { background-size: 280% 280%, 250% 250%, 220% 220%, 270% 270%, 230% 230%, 260% 260%; filter: hue-rotate(40deg) saturate(calc(var(--nebula-sat) * 1.05)); }
-  100% { background-size: 260% 260%, 260% 260%, 260% 260%, 260% 260%, 260% 260%, 260% 260%; filter: hue-rotate(80deg) saturate(var(--nebula-sat)); }
-}
-
-@keyframes nebulaPan{
-  0%{
-    background-position:  30% 30%,  90% 15%,  45% 55%,  20% 90%,  85% 70%,  55% 40%;
-  }
-  50%{
-    background-position: 120% 60%, -20% 45%,  80% 20%,  10% 60%, 140% 30%,  20% 85%;
-  }
-  100%{
-    background-position:   0% 120%, 150% -10%, 10%  0%,  60% 10%,  -10% 90%, 130%  0%;
-  }
-}
-
-/* soft animated grain so it feels organic (cheap GPU) */
-body.site::after{
-  content:"";
-  position:fixed; inset:0;
-  z-index:-1; pointer-events:none;
-  opacity: var(--nebula-grain);
-  mix-blend-mode: soft-light;
-  background:
-    repeating-conic-gradient(from 0deg,
-      rgba(255,255,255,.035) 0 2deg,
-      rgba(0,0,0,.035)        2deg 4deg);
-  background-size: 280% 280%;
-  animation: grainDrift calc(var(--nebula-speed) * .7) linear infinite;
-}
-@keyframes grainDrift{ to{ background-position: 200% 200%; } }
-
-/* motion preference */
-@media (prefers-reduced-motion: reduce){
-  body.site{ animation:none; }
-  body.site::after{ animation:none; }
+body{
+  height:100vh;
+  margin: 0;
+  --x: calc(var(--posX, 0) * 1px);
+  --y: calc(var(--posY, 0) * 1px);
+  background-image: 
+    linear-gradient(115deg, rgb(211 255 215), rgb(0 0 0)), 
+    radial-gradient( 90% 100% at calc( 50% + var(--x)) calc( 0% + var(--y)), rgb(200 200 200), rgb(022 000 045)), 
+    radial-gradient(100% 100% at calc( 80% - var(--x)) calc( 0% - var(--y)), rgb(250 255 000), rgb(036 000 000)), 
+    radial-gradient(150% 210% at calc(100% + var(--x)) calc( 0% + var(--y)), rgb(020 175 125), rgb(000 010 255)), 
+    radial-gradient(100% 100% at calc(100% - var(--x)) calc(30% - var(--y)), rgb(255 077 000), rgb(000 200 255)), 
+    linear-gradient(60deg, rgb(255 000 000), rgb(120 086 255));
+  background-blend-mode: overlay, overlay, difference, difference, difference, normal;
 }
 
 /* ========== Header ========== */
