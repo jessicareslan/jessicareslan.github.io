@@ -8,7 +8,12 @@
 }
 
 *{ box-sizing:border-box; }
-html, body{ margin:0; }
+html, body {
+  height: 100%;     /* allow flex to stretch full height */
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+}
 
 /* main logo text */
 .logo-text {
@@ -237,10 +242,11 @@ nav a:hover{ color:var(--pink); }
 
 /* ========== Footer ========== */
 main{ flex:1; } /* push footer down */
-footer{
-  border-top:1px solid rgba(255,255,255,.08);
-  padding:26px 0 40px;
-  background: rgba(0,0,0,.35);
+footer {
+  margin-top: auto; /* ensures footer stays at bottom */
+  background: rgba(0,0,0,0.7); /* your current footer bg */
+  color: white;
+  padding: 1rem;
 }
 .foot{ display:flex; gap:22px; align-items:center; justify-content:space-between; flex-wrap:wrap; }
 .brand .logo-text{ font-size:1.1rem; }
