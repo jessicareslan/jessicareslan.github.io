@@ -86,8 +86,8 @@ body{
 
   /* continuous, non-repeating drift */
   animation:
-    driftX 15s ease-in-out infinite alternate,
-    driftY 20s ease-in-out infinite alternate;
+    driftX 5s ease-in-out infinite alternate,
+    driftY 10s ease-in-out infinite alternate;
   will-change: background-image;
 }
 
