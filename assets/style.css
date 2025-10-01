@@ -107,13 +107,13 @@ nav a:hover{ color:var(--pink); }
   animation: latest-color 18s linear infinite;
 }
 @keyframes latest-rotate{ to { transform: rotate(360deg); } }
-/*
+
 @keyframes latest-color{
   0%{ fill:#ffffff; }
   33%{ fill:#D10072; }
   66%{ fill:#9966CC; }
   100%{ fill:#ffffff; }
-*/
+
 }
 
 /* Hero headings */
