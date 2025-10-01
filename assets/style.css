@@ -31,21 +31,57 @@ html, body{ margin:0; }
 
 .wrap{ max-width:var(--max); margin:0 auto; padding:0 22px; }
 
-body{
-  height:100vh;
-  margin: 0;
-  --x: calc(var(--posX, 0) * 1px);
-  --y: calc(var(--posY, 0) * 1px);
-  background-image: 
-    linear-gradient(115deg, rgb(211 255 215), rgb(0 0 0)), 
-    radial-gradient( 90% 100% at calc( 50% + var(--x)) calc( 0% + var(--y)), rgb(200 200 200), rgb(022 000 045)), 
-    radial-gradient(100% 100% at calc( 80% - var(--x)) calc( 0% - var(--y)), rgb(250 255 000), rgb(036 000 000)), 
-    radial-gradient(150% 210% at calc(100% + var(--x)) calc( 0% + var(--y)), rgb(020 175 125), rgb(000 010 255)), 
-    radial-gradient(100% 100% at calc(100% - var(--x)) calc(30% - var(--y)), rgb(255 077 000), rgb(000 200 255)), 
-    linear-gradient(60deg, rgb(255 000 000), rgb(120 086 255));
-  background-blend-mode: overlay, overlay, difference, difference, difference, normal;
+/* Smooth, continuous motion driven by time */
+:root{
+  --posX: 0; /* animated below */
+  --posY: 0; /* animated below */
 }
 
+@keyframes moveX {
+  0%   { --posX: -220; }
+  25%  { --posX: 160; }
+  50%  { --posX: -60; }
+  75%  { --posX: 200; }
+  100% { --posX: -220; }
+}
+
+@keyframes moveY {
+  0%   { --posY: 180; }
+  20%  { --posY: -140; }
+  55%  { --posY: 220; }
+  80%  { --posY: -80; }
+  100% { --posY: 180; }
+}
+
+/* Accessibility: respect reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  body { animation: none !important; }
+}
+
+body{
+  height: 100vh;
+  margin: 0;
+
+  /* your variables → converted to px */
+  --x: calc(var(--posX) * 1px);
+  --y: calc(var(--posY) * 1px);
+
+  /* your exact colors & layers preserved */
+  background-image:
+    linear-gradient(115deg, rgb(211 255 215), rgb(0 0 0)),
+    radial-gradient( 90% 100% at calc( 50% + var(--x)) calc( 0% + var(--y)), rgb(200 200 200), rgb(022 000 045)),
+    radial-gradient(100% 100% at calc( 80% - var(--x)) calc( 0% - var(--y)), rgb(250 255 000), rgb(036 000 000)),
+    radial-gradient(150% 210% at calc(100% + var(--x)) calc( 0% + var(--y)), rgb(020 175 125), rgb(000 010 255)),
+    radial-gradient(100% 100% at calc(100% - var(--x)) calc(30% - var(--y)), rgb(255 077 000), rgb(000 200 255)),
+    linear-gradient(60deg, rgb(255 000 000), rgb(120 086 255));
+  background-blend-mode: overlay, overlay, difference, difference, difference, normal;
+
+  /* drive motion with time; different durations create organic drift */
+  animation:
+    moveX 18s linear infinite alternate,
+    moveY 23s linear infinite alternate;
+  will-change: background-image;
+}
 /* ========== Header ========== */
 header{
   padding:16px 22px;
