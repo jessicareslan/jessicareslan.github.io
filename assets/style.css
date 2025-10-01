@@ -36,38 +36,45 @@ html, body {
 
 .wrap{ max-width:var(--max); margin:0 auto; padding:0 22px; }
 
-/* Smooth, continuous motion driven by time */
-:root{
-  --posX: 0; /* animated below */
-  --posY: 0; /* animated below */
+/* Make the custom props smoothly animatable */
+@property --posX {
+  syntax: '<length>';
+  inherits: false;
+  initial-value: 0px;
+}
+@property --posY {
+  syntax: '<length>';
+  inherits: false;
+  initial-value: 0px;
 }
 
-@keyframes moveX {
-  0%   { --posX: -220; }
-  25%  { --posX: 160; }
-  50%  { --posX: -60; }
-  75%  { --posX: 200; }
-  100% { --posX: -220; }
+:root {
+  --posX: 0px;
+  --posY: 0px;
 }
 
-@keyframes moveY {
-  0%   { --posY: 180; }
-  20%  { --posY: -140; }
-  55%  { --posY: 220; }
-  80%  { --posY: -80; }
-  100% { --posY: 180; }
+@keyframes driftX {
+  from { --posX: -260px; }
+  to   { --posX:  260px; }
+}
+@keyframes driftY {
+  from { --posY:  220px; }
+  to   { --posY: -220px; }
 }
 
+/* Respect reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  body { animation: none !important; }
+}
 
 body{
-  height: 100vh;
-  margin: 0;
+  height:100vh;
+  margin:0;
 
-  /* your variables → converted to px */
-  --x: calc(var(--posX) * 1px);
-  --y: calc(var(--posY) * 1px);
+  /* use the smoothly-animating vars directly */
+  --x: var(--posX);
+  --y: var(--posY);
 
-  /* your exact colors & layers preserved */
   background-image:
     linear-gradient(115deg, rgb(211 255 215), rgb(0 0 0)),
     radial-gradient( 90% 100% at calc( 50% + var(--x)) calc( 0% + var(--y)), rgb(200 200 200), rgb(022 000 045)),
@@ -77,12 +84,13 @@ body{
     linear-gradient(60deg, rgb(255 000 000), rgb(120 086 255));
   background-blend-mode: overlay, overlay, difference, difference, difference, normal;
 
-  /* drive motion with time; different durations create organic drift */
+  /* continuous, non-repeating drift */
   animation:
-    moveX 18s linear infinite alternate,
-    moveY 23s linear infinite alternate;
+    driftX 38s ease-in-out infinite alternate,
+    driftY 51s ease-in-out infinite alternate;
   will-change: background-image;
 }
+
 /* ========== Header ========== */
 header{
   padding:16px 22px;
