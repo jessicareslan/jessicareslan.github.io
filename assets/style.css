@@ -58,10 +58,6 @@ html, body {
   100% { --posY: 180; }
 }
 
-/* Accessibility: respect reduced motion */
-@media (prefers-reduced-motion: reduce) {
-  body { animation: none !important; }
-}
 
 body{
   height: 100vh;
