@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -8,22 +9,26 @@
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
   <link href="https://fonts.googleapis.com/css2?family=Bitcount+Grid+Double:wght@100..900&family=Emilys+Candy&display=swap" rel="stylesheet">
 
-  <link rel="stylesheet" href="assets/style.css" />
+  <link rel="stylesheet" href="assets/style.css">
 </head>
 
 <body class="site">
+
+  <!-- Animated Background -->
   <div id="vanta-bg"></div>
 
   <header>
-    <a href="./" class="logo" aria-label="Funky Earth home">
+    <a href="./" class="logo">
       <span class="logo-text">Funky Earth</span>
     </a>
 
-    <nav aria-label="Primary">
+    <nav>
       <div class="dropdown">
         <a href="#articles">Unearth ▾</a>
+
         <div class="dropdown-content">
           <a href="#environment">Environment</a>
           <a href="#recipes">Food</a>
@@ -31,82 +36,143 @@
           <a href="#poetry">Poetry</a>
           <a href="#opinions">Opinions</a>
         </div>
+
       </div>
+
       <a href="#submissions">Submissions</a>
       <a href="#about">About</a>
+
     </nav>
   </header>
 
   <section class="hero-banner">
+
     <div class="overlay">
-      <div class="latest-circle-wrap top-left" aria-hidden="true">
+
+      <div class="latest-circle-wrap top-left">
+
         <div class="latest-circle">
+
           <svg viewBox="0 0 200 200" width="160" height="160">
+
             <defs>
-              <path id="latest-circle-path"
+
+              <path
+                id="latest-circle-path"
                 d="M100,100 m-75,0 a75,75 0 1,1 150,0 a75,75 0 1,1 -150,0" />
+
             </defs>
+
             <text class="ring-text" letter-spacing="3">
-              <textPath href="#latest-circle-path" startOffset="0%">
+
+              <textPath href="#latest-circle-path">
+
                 JOIN WEEKLY NEWSLETTER
+
               </textPath>
+
             </text>
+
           </svg>
+
         </div>
 
         <button class="mail-btn" id="openNewsletter">
-          <img src="assets/images/mail.png" alt="Join Newsletter" />
+          <img src="assets/images/mail.png" alt="Join Newsletter">
         </button>
+
       </div>
 
       <div class="newsletter-modal" id="newsletterModal">
+
         <div class="modal-content">
+
           <span class="close-btn" id="closeNewsletter">&times;</span>
+
           <form id="newsletterForm">
-            <input type="email" placeholder="Your email address" required />
-            <button type="submit">Subscribe</button>
+
+            <input
+              type="email"
+              placeholder="Your email address"
+              required>
+
+            <button type="submit">
+
+              Subscribe
+
+            </button>
+
           </form>
+
         </div>
+
       </div>
+
     </div>
+
   </section>
 
-  <main class="wrap" id="articles" role="main">
-    <!-- your content cards go here -->
+  <main class="wrap" id="articles">
+
   </main>
 
   <footer>
+
     <div class="wrap foot">
+
       <div class="brand">
-        <span class="logo-text">Funky Earth</span>
-        <p class="tagline">love and passion</p>
+
+        <span class="logo-text">
+
+          Funky Earth
+
+        </span>
+
+        <p class="tagline">
+
+          love and passion
+
+        </p>
+
       </div>
 
-      <nav class="muted" aria-label="Footer">
-        <a href="#articles">Latest</a>
-        <a href="#about">About</a>
-      </nav>
     </div>
+
   </footer>
 
   <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r134/three.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/vanta@latest/dist/vanta.halo.min.js"></script>
 
   <script>
+
     VANTA.HALO({
+
       el: "#vanta-bg",
+
       mouseControls: true,
+
       touchControls: true,
+
       gyroControls: false,
+
       minHeight: 200,
+
       minWidth: 200,
+
       baseColor: 0x000000,
+
       backgroundColor: 0xffffff,
-      amplitudeFactor: 2.5,
-      size: 1.2
+
+      amplitudeFactor: 2,
+
+      size: 1.1
+
     });
+
   </script>
 
   <script src="assets/script.js"></script>
+
 </body>
+
 </html>
