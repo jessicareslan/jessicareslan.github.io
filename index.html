@@ -6,19 +6,21 @@
   <title>Funky Earth</title>
   <meta name="description" content="Photography, video, poetry, and opinions." />
 
-  <!-- Google Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Bitcount+Grid+Double:wght@100..900&family=Emilys+Candy&display=swap" rel="stylesheet">
 
   <link rel="stylesheet" href="assets/style.css" />
 </head>
+
 <body class="site">
-  <!-- Header -->
+  <div id="vanta-bg"></div>
+
   <header>
     <a href="./" class="logo" aria-label="Funky Earth home">
       <span class="logo-text">Funky Earth</span>
     </a>
+
     <nav aria-label="Primary">
       <div class="dropdown">
         <a href="#articles">Unearth ▾</a>
@@ -35,10 +37,8 @@
     </nav>
   </header>
 
-  <!-- Hero (background is on BODY; hero is a content canvas) -->
   <section class="hero-banner">
     <div class="overlay">
-      <!-- Spinning LATEST circle, pinned to a corner -->
       <div class="latest-circle-wrap top-left" aria-hidden="true">
         <div class="latest-circle">
           <svg viewBox="0 0 200 200" width="160" height="160">
@@ -48,18 +48,17 @@
             </defs>
             <text class="ring-text" letter-spacing="3">
               <textPath href="#latest-circle-path" startOffset="0%">
-                   JOIN WEEKLY NEWSLETTER
+                JOIN WEEKLY NEWSLETTER
               </textPath>
             </text>
           </svg>
         </div>
-         <button class="mail-btn" id="openNewsletter">
-            <img src="assets/images/mail.png" alt="Join Newsletter"/>
-          </button>
+
+        <button class="mail-btn" id="openNewsletter">
+          <img src="assets/images/mail.png" alt="Join Newsletter" />
+        </button>
       </div>
 
-    
-      <!-- Newsletter popup -->
       <div class="newsletter-modal" id="newsletterModal">
         <div class="modal-content">
           <span class="close-btn" id="closeNewsletter">&times;</span>
@@ -67,9 +66,8 @@
             <input type="email" placeholder="Your email address" required />
             <button type="submit">Subscribe</button>
           </form>
+        </div>
       </div>
-    </div>
-      
     </div>
   </section>
 
@@ -77,20 +75,37 @@
     <!-- your content cards go here -->
   </main>
 
-
-
-
   <footer>
     <div class="wrap foot">
       <div class="brand">
         <span class="logo-text">Funky Earth</span>
-         <p class="tagline">love and passion</p>
+        <p class="tagline">love and passion</p>
       </div>
+
       <nav class="muted" aria-label="Footer">
-        <a href="#articles">Latest</a><a href="#about">About</a>
+        <a href="#articles">Latest</a>
+        <a href="#about">About</a>
       </nav>
     </div>
   </footer>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r134/three.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/vanta@latest/dist/vanta.halo.min.js"></script>
+
+  <script>
+    VANTA.HALO({
+      el: "#vanta-bg",
+      mouseControls: true,
+      touchControls: true,
+      gyroControls: false,
+      minHeight: 200,
+      minWidth: 200,
+      baseColor: 0x000000,
+      backgroundColor: 0xffffff,
+      amplitudeFactor: 2.5,
+      size: 1.2
+    });
+  </script>
 
   <script src="assets/script.js"></script>
 </body>
