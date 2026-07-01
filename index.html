@@ -52,6 +52,7 @@
              / min(resolution.x, resolution.y);
 
     float d = length(p) * distortion;
+    d = min(d, 0.06); 
 
     float rx = p.x * (1.0 + d);
     float gx = p.x;
