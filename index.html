@@ -76,6 +76,7 @@ void main() {
     float alpha = max(max(r, g), b);
     alpha = smoothstep(0.02, 0.35, alpha);
 
+    if (alpha < 0.03) discard;
     gl_FragColor = vec4(color, alpha);
 }
 </script>
