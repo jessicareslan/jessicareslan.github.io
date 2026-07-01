@@ -480,4 +480,241 @@ form button {
   footer {
     flex-direction: column;
   }
+  
+}
+
+.space-window-section {
+
+  height: 220vh;
+
+  position: relative;
+
+  background: #f2053d;
+
+  overflow: clip;
+
+}
+
+.grid-bg {
+
+  position: sticky;
+
+  top: 0;
+
+  height: 100vh;
+
+  background:
+
+    linear-gradient(#050505 2px, transparent 2px),
+
+    linear-gradient(90deg, #050505 2px, transparent 2px),
+
+    #f2053d;
+
+  background-size: 120px 120px;
+
+}
+
+.window-frame {
+
+  position: sticky;
+
+  top: 50%;
+
+  left: 50%;
+
+  width: clamp(190px, 22vw, 330px);
+
+  height: clamp(520px, 70vh, 760px);
+
+  margin: -38vh auto 0;
+
+  border-radius: 999px;
+
+  border: 3px solid #050505;
+
+  background: #f2053d;
+
+  padding: 22px;
+
+  transform-origin: center;
+
+  animation: enter-window linear both;
+
+  animation-timeline: scroll();
+
+  animation-range: 20% 80%;
+
+}
+
+.space-scene {
+
+  position: absolute;
+
+  inset: 22px;
+
+  border-radius: 999px;
+
+  background:
+
+    radial-gradient(circle at 50% 120%, #332b7a 0, transparent 35%),
+
+    radial-gradient(circle at 50% 20%, #16276f 0, transparent 35%),
+
+    #050505;
+
+  overflow: hidden;
+
+}
+
+.stars,
+
+.stars::before,
+
+.stars::after {
+
+  position: absolute;
+
+  inset: 0;
+
+  content: "";
+
+  background-image:
+
+    radial-gradient(#fff 1px, transparent 1px),
+
+    radial-gradient(#f2053d 1px, transparent 1px);
+
+  background-size: 34px 34px, 58px 58px;
+
+  background-position: 0 0, 20px 14px;
+
+  opacity: 0.75;
+
+}
+
+.stars {
+
+  animation: star-drift 18s linear infinite;
+
+}
+
+.stars-2 {
+
+  opacity: 0.35;
+
+  transform: scale(1.6);
+
+  animation-duration: 30s;
+
+}
+
+.planet {
+
+  position: absolute;
+
+  width: 130px;
+
+  height: 130px;
+
+  border-radius: 50%;
+
+  bottom: -40px;
+
+  left: 50%;
+
+  transform: translateX(-50%);
+
+  background:
+
+    radial-gradient(circle at 30% 30%, #f4efe3, #9dff66 45%, #111 72%);
+
+  box-shadow: 0 0 80px rgba(157, 255, 102, 0.45);
+
+}
+
+.window-text {
+
+  position: absolute;
+
+  inset: 0;
+
+  display: grid;
+
+  place-items: center;
+
+  color: #f2053d;
+
+  font-weight: 950;
+
+  font-size: clamp(120px, 15vw, 230px);
+
+  line-height: 0.75;
+
+  z-index: 3;
+
+  pointer-events: none;
+
+}
+
+.window-text span {
+
+  display: block;
+
+}
+
+.window-text {
+
+  display: flex;
+
+  flex-direction: column;
+
+  justify-content: center;
+
+  align-items: center;
+
+  letter-spacing: -0.12em;
+
+}
+
+@keyframes enter-window {
+
+  0% {
+
+    transform: scale(1);
+
+    border-radius: 999px;
+
+  }
+
+  45% {
+
+    transform: scale(2.3);
+
+  }
+
+  100% {
+
+    transform: scale(9);
+
+    border-radius: 0;
+
+  }
+
+}
+
+@keyframes star-drift {
+
+  from {
+
+    transform: translateY(0);
+
+  }
+
+  to {
+
+    transform: translateY(-180px);
+
+  }
+
 }
