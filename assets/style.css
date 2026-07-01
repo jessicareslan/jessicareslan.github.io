@@ -483,64 +483,7 @@ form button {
   
 }
 
-.space-window-section{
-    height:220vh;
-    background:#050505;
-    position:relative;
-    overflow:hidden;
-}
-
-.star-portal{
-
-    position:sticky;
-    top:50%;
-
-    width:clamp(360px,38vw,560px);
-    aspect-ratio:1;
-
-    margin:-280px auto 0;
-
-    background:#ff008c;
-
-    clip-path:polygon(
-        50% 0%,
-        61% 35%,
-        98% 35%,
-        68% 57%,
-        79% 91%,
-        50% 72%,
-        21% 91%,
-        32% 57%,
-        2% 35%,
-        39% 35%
-    );
-
-    transform-origin:center;
-
-    animation:zoomStar linear both;
-    animation-timeline:scroll();
-    animation-range:15% 85%;
-}
-
-.pink-space{
-
-    position:absolute;
-    inset:6px;
-
-    background:#ff008c;
-
-    clip-path:inherit;
-
-}
-
-@keyframes zoomStar{
-
-    from{
-        transform:scale(1);
-    }
-
-    to{
-        transform:scale(22);
-    }
-
+body {
+  margin: 0;
+  overflow: hidden;
 }
