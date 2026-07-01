@@ -53,9 +53,13 @@
 
     float d = length(p) * distortion;
 
-    float rx = p.x * (1.0 + d);
+   <--! float rx = p.x * (1.0 + d);
     float gx = p.x;
-    float bx = p.x * (1.0 - d);
+    float bx = p.x * (1.0 - d); -->
+    
+    float rx = p.x;
+    float gx = p.x;
+    float bx = p.x;
 
     float r = 0.05 / abs(
         p.y + sin((rx + time) * xScale) * yScale
