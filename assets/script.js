@@ -25,12 +25,6 @@ class Stage {
 
     this.isInitialized = false;
 
-    const renderer = new THREE.WebGLRenderer({
-  canvas,
-  alpha: true,
-  antialias: true
-});
-    this.renderer.setClearColor(0x000000, 0);
   }
 
   init() {
@@ -43,7 +37,8 @@ class Stage {
       alpha: true,
       antialias: true
     });
-
+    this.renderer.setClearColor(0x000000, 0);
+    
     this.renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
 
     this.camera = new THREE.OrthographicCamera(-1, 1, 1, -1, 0, 1);
