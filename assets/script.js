@@ -15,222 +15,151 @@ window.addEventListener("pointermove", (event) => {
   );
 });
 
-<!-- BEGINNING -->
-  
 class Stage {
   constructor() {
-    this.renderParam = {
-      clearColor: 0x666666,
-      width: window.innerWidth,
-      height: window.innerHeight
-    };
-
-    this.cameraParam = {
-      left: -1,
-      right: 1,
-      top: 1,
-      bottom: 1,
-      near: 0,
-      far: -1
-    };
+    this.canvas = document.getElementById("webgl-canvas");
 
     this.scene = null;
     this.camera = null;
     this.renderer = null;
-    this.geometry = null;
-    this.material = null;
-    this.mesh = null;
 
     this.isInitialized = false;
   }
 
   init() {
-    this._setScene();
-    this._setRender();
-    this._setCamera();
+    if (!this.canvas || typeof THREE === "undefined") return;
+
+    this.scene = new THREE.Scene();
+
+    this.renderer = new THREE.WebGLRenderer({
+      canvas: this.canvas,
+      alpha: true,
+      antialias: true
+    });
+
+    this.renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+
+    this.camera = new THREE.OrthographicCamera(-1, 1, 1, -1, 0, 1);
+
+    this.onResize();
 
     this.isInitialized = true;
   }
 
-  _setScene() {
-    this.scene = new THREE.Scene();
-  }
-
-  _setRender() {
-    this.renderer = new THREE.WebGLRenderer({
-      canvas: document.getElementById("webgl-canvas")
-    });
-    this.renderer.setPixelRatio(window.devicePixelRatio);
-    this.renderer.setClearColor(new THREE.Color(this.renderParam.clearColor));
-    this.renderer.setSize(this.renderParam.width, this.renderParam.height);
-  }
-
-  _setCamera() {
-    if (!this.isInitialized) {
-      this.camera = new THREE.OrthographicCamera(
-        this.cameraParam.left,
-        this.cameraParam.right,
-        this.cameraParam.top,
-        this.cameraParam.bottom,
-        this.cameraParam.near,
-        this.cameraParam.far
-      );
-    }
-    
-    const windowWidth = window.innerWidth;
-    const windowHeight = window.innerHeight;
-
-    this.camera.aspect = windowWidth / windowHeight;
-
-    this.camera.updateProjectionMatrix();
-    this.renderer.setSize(windowWidth, windowHeight);
-  }
-
-  _render() {
-    this.renderer.render(this.scene, this.camera);
-  }
-
   onResize() {
-    this._setCamera();
+    if (!this.canvas || !this.renderer || !this.camera) return;
+
+    const width = this.canvas.clientWidth;
+    const height = this.canvas.clientHeight;
+
+    this.renderer.setSize(width, height, false);
+
+    this.camera.left = -1;
+    this.camera.right = 1;
+    this.camera.top = 1;
+    this.camera.bottom = -1;
+    this.camera.updateProjectionMatrix();
   }
 
-  onRaf() {
-    this._render();
+  render() {
+    if (!this.renderer || !this.scene || !this.camera) return;
+    this.renderer.render(this.scene, this.camera);
   }
 }
 
-class Mesh {
+class WaveMesh {
   constructor(stage) {
-    this.canvas = document.getElementById("webgl-canvas");
-    this.canvasWidth = this.canvas.width;
-    this.canvasHeight = this.canvas.height;
+    this.stage = stage;
+    this.mesh = null;
 
     this.uniforms = {
-      resolution: { type: "v2", value: [ this.canvasWidth, this.canvasHeight ] },
-      time: { type: "f", value: 0.0 },
-      xScale: { type: "f", value: 1.0 },
-      yScale: { type: "f", value: 0.5 },
-      distortion: { type: "f", value: 0.050 }
+      resolution: {
+        value: new THREE.Vector2(1, 1)
+      },
+      time: {
+        value: 0
+      },
+      xScale: {
+        value: 1.45
+      },
+      yScale: {
+        value: 0.28
+      },
+      distortion: {
+        value: 0.045
+      }
     };
-
-    this.stage = stage;
-
-    this.mesh = null;
-    
-    this.xScale = 1.0;
-    this.yScale = 0.5;
-    this.distortion = 0.050;
   }
 
   init() {
-    this._setMesh();
-    // this._setGui();
-  }
+    const vertexShader = document.getElementById("js-vertex-shader")?.textContent;
+    const fragmentShader = document.getElementById("js-fragment-shader")?.textContent;
 
-  _setMesh() {
-    const position = [
-      -1.0, -1.0, 0.0,
-       1.0, -1.0, 0.0,
-      -1.0,  1.0, 0.0,
-       1.0, -1.0, 0.0,
-      -1.0,  1.0, 0.0,
-       1.0,  1.0, 0.0
-    ];
+    if (!vertexShader || !fragmentShader || !this.stage.scene) return;
 
-    const positions = new THREE.BufferAttribute(new Float32Array(position), 3);
+    const positions = new Float32Array([
+      -1, -1, 0,
+       1, -1, 0,
+      -1,  1, 0,
+       1, -1, 0,
+      -1,  1, 0,
+       1,  1, 0
+    ]);
 
     const geometry = new THREE.BufferGeometry();
-    geometry.setAttribute("position", positions);
+    geometry.setAttribute("position", new THREE.BufferAttribute(positions, 3));
 
     const material = new THREE.RawShaderMaterial({
-      vertexShader: document.getElementById("js-vertex-shader").textContent,
-      fragmentShader: document.getElementById("js-fragment-shader").textContent,
+      vertexShader,
+      fragmentShader,
       uniforms: this.uniforms,
-      side: THREE.DoubleSide
+      transparent: true,
+      depthWrite: false
     });
 
     this.mesh = new THREE.Mesh(geometry, material);
-
     this.stage.scene.add(this.mesh);
-  }
-  
-  _diffuse() {
-    // gsap.to(this.mesh.material.uniforms.xScale, {
-    //   value: 2,
-    //   duration: 0.1,
-    //   ease: 'power2.inOut',
-    //   repeat: -1,
-    //   yoyo: true
-    // });
-    // gsap.to(this.mesh.material.uniforms.yScale, {
-    //   value: 1,
-    //   duration: 0.1,
-    //   ease: 'power2.inOut',
-    //   repeat: -1,
-    //   yoyo: true
-    // });
-  }
-  
-  _render() {
-    this.uniforms.time.value += 0.01;
+
+    this.onResize();
   }
 
-  _setGui() {
-    const parameter = {
-      xScale: this.xScale,
-      yScale: this.yScale,
-      distortion: this.distortion
-    }
-    const gui = new dat.GUI();
-    gui.add(parameter, "xScale", 0.00, 5.00, 0.01).onChange((value) => {
-      this.mesh.material.uniforms.xScale.value = value;
-    });
-    gui.add(parameter, "yScale", 0.00, 1.00, 0.01).onChange((value) => {
-      this.mesh.material.uniforms.yScale.value = value;
-    });
-    gui.add(parameter, "distortion", 0.001, 0.100, 0.001).onChange((value) => {
-      this.mesh.material.uniforms.distortion.value = value;
-    });
+  onResize() {
+    const canvas = this.stage.canvas;
+    if (!canvas) return;
+
+    this.uniforms.resolution.value.set(
+      canvas.clientWidth,
+      canvas.clientHeight
+    );
   }
 
-  onRaf() {
-    this._render();
+  render() {
+    this.uniforms.time.value += 0.012;
   }
 }
 
-(() => {
-  const stage = new Stage();
+const stage = new Stage();
+stage.init();
 
-  stage.init();
+const wave = new WaveMesh(stage);
+wave.init();
 
-  const mesh = new Mesh(stage);
+function resizeWave() {
+  stage.onResize();
+  wave.onResize();
+}
 
-  mesh.init();
+window.addEventListener("resize", resizeWave);
 
-  window.addEventListener("resize", () => {
-    stage.onResize();
-  });
-  
-  window.addEventListener("load", () => {
-    setTimeout(() => {
-      mesh._diffuse();
-    }, 1000);
-  });
+function animateWave() {
+  wave.render();
+  stage.render();
+  requestAnimationFrame(animateWave);
+}
 
-  const _raf = () => {
-    window.requestAnimationFrame(() => {
-      stage.onRaf();
-      mesh.onRaf();
-
-      _raf();
-    });
-  };
-
-  _raf();
-})();
-
-<!-- END -->
-
+if (stage.isInitialized) {
+  animateWave();
+}
 
 const openNewsletter = document.getElementById("openNewsletter");
 const closeNewsletter = document.getElementById("closeNewsletter");
