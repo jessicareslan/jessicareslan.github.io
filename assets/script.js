@@ -54,7 +54,7 @@ class Stage {
     const width = this.canvas.clientWidth;
     const height = this.canvas.clientHeight;
 
-    this.renderer.setSize(width, height, false);
+    this.renderer.setSize(width, height);
 
     this.camera.left = -1;
     this.camera.right = 1;
