@@ -146,12 +146,12 @@ footer,
 }
 
 #webgl-canvas {
+
   position: absolute;
   left: 0;
   right: 0;
   bottom: -20px;
-
-  width: 1176px;
+  width: 100%;      /* was: 1176px */
   height: 100%;
 
   display: block;
