@@ -484,7 +484,7 @@ form button {
 }
 
 .space-window-section {
-  height: 220vh;
+  height: 240vh;
   position: relative;
   background: #050505;
   overflow: clip;
@@ -495,43 +495,19 @@ form button {
   top: 0;
   height: 100vh;
   background:
-    linear-gradient(rgba(157, 255, 102, 0.8) 1.5px, transparent 1.5px),
-    linear-gradient(90deg, rgba(157, 255, 102, 0.8) 1.5px, transparent 1.5px),
+    linear-gradient(rgba(157, 255, 102, 0.9) 1.5px, transparent 1.5px),
+    linear-gradient(90deg, rgba(157, 255, 102, 0.9) 1.5px, transparent 1.5px),
     #050505;
   background-size: 110px 110px;
 }
 
-.window-frame {
+.star-portal {
   position: sticky;
   top: 50%;
-  width: clamp(120px, 14vw, 210px);
-  height: clamp(300px, 46vh, 480px);
-  margin: -24vh auto 0;
-  border-radius: 999px;
-  border: 2px solid #9dff66;
-  background: #9dff66;
-  padding: 14px;
-  transform-origin: center;
-  animation: enter-window linear both;
-  animation-timeline: scroll();
-  animation-range: 20% 80%;
-}
-
-.space-scene {
-  position: absolute;
-  inset: 14px;
-  border-radius: 999px;
-  background: #050505;
-  overflow: hidden;
-}
-
-.star-window {
-  position: absolute;
-  inset: 50%;
-  width: 74px;
-  height: 74px;
-  transform: translate(-50%, -50%);
-  background: #9dff66;
+  width: clamp(110px, 13vw, 180px);
+  aspect-ratio: 1;
+  margin: -90px auto 0;
+  background: #ff008c;
   clip-path: polygon(
     50% 0%,
     61% 35%,
@@ -544,60 +520,74 @@ form button {
     2% 35%,
     39% 35%
   );
-  box-shadow: 0 0 40px rgba(157, 255, 102, 0.9);
-  z-index: 3;
+  box-shadow:
+    0 0 18px #ff008c,
+    0 0 50px #ff008c,
+    0 0 110px rgba(255, 0, 140, 0.85);
+  transform-origin: center;
+  animation: zoom-through-star linear both;
+  animation-timeline: scroll();
+  animation-range: 12% 88%;
 }
 
-.stars,
-.stars::before,
-.stars::after {
+.pink-space {
   position: absolute;
-  inset: 0;
+  inset: 7px;
+  background:
+    radial-gradient(circle at 50% 50%, #ff7ad9 0%, #ff008c 35%, #050505 78%);
+  clip-path: inherit;
+  overflow: hidden;
+}
+
+.pink-stars,
+.pink-stars::before,
+.pink-stars::after {
   content: "";
+  position: absolute;
+  inset: -40%;
   background-image:
-    radial-gradient(#9dff66 1px, transparent 1px),
-    radial-gradient(#f4efe3 1px, transparent 1px);
-  background-size: 32px 32px, 58px 58px;
-  background-position: 0 0, 18px 14px;
-  opacity: 0.65;
+    radial-gradient(#ffffff 1px, transparent 1.5px),
+    radial-gradient(#ffb3e6 1.4px, transparent 2px),
+    radial-gradient(#ff008c 1px, transparent 1.8px);
+  background-size: 28px 28px, 52px 52px, 83px 83px;
+  background-position: 0 0, 18px 10px, 32px 44px;
+  filter:
+    drop-shadow(0 0 4px #ff008c)
+    drop-shadow(0 0 12px #ff008c);
+  opacity: 0.95;
+  animation: pink-star-drift 12s linear infinite;
 }
 
-.stars {
-  animation: star-drift 18s linear infinite;
+.pink-stars-2 {
+  opacity: 0.45;
+  transform: scale(1.7);
+  animation-duration: 24s;
 }
 
-.stars-2 {
-  opacity: 0.28;
-  transform: scale(1.5);
-  animation-duration: 30s;
-}
-
-.window-text {
-  display: none;
-}
-
-@keyframes enter-window {
+@keyframes zoom-through-star {
   0% {
-    transform: scale(1);
-    border-radius: 999px;
+    transform: scale(1) rotate(-8deg);
   }
 
-  45% {
-    transform: scale(2.1);
+  35% {
+    transform: scale(2.4) rotate(0deg);
+  }
+
+  70% {
+    transform: scale(7) rotate(8deg);
   }
 
   100% {
-    transform: scale(10);
-    border-radius: 0;
+    transform: scale(24) rotate(12deg);
   }
 }
 
-@keyframes star-drift {
+@keyframes pink-star-drift {
   from {
     transform: translateY(0);
   }
 
   to {
-    transform: translateY(-180px);
+    transform: translateY(-220px);
   }
 }
