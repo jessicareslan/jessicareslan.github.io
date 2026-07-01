@@ -194,4 +194,14 @@ if (openNewsletter && closeNewsletter && newsletterModal && newsletterForm) {
     closeModal();
     newsletterForm.reset();
   });
+
+const renderer = new THREE.WebGLRenderer({
+  canvas,
+  alpha: true,
+  antialias: true
+});
+
+renderer.setClearColor(0x000000, 0);
+
+  
 }
