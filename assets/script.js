@@ -1,28 +1,38 @@
-// 1) Tap-to-open dropdown on touch devices
+// Tap-to-open dropdown on touch devices
 (() => {
-  const isTouch = window.matchMedia('(hover: none)').matches;
-  const links = document.querySelectorAll('nav .dropdown > a');
+  const isTouch = window.matchMedia("(hover: none)").matches;
+  const links = document.querySelectorAll("nav .dropdown > a");
 
-  links.forEach(link => {
-    link.addEventListener('click', (e) => {
-      if (!isTouch) return; // desktop uses :hover
+  links.forEach((link) => {
+    link.addEventListener("click", (e) => {
+      if (!isTouch) return;
+
       e.preventDefault();
-      document.querySelectorAll('nav .dropdown.open').forEach(d => {
-        if (d !== link.parentElement) d.classList.remove('open');
+
+      document.querySelectorAll("nav .dropdown.open").forEach((d) => {
+        if (d !== link.parentElement) d.classList.remove("open");
       });
-      link.parentElement.classList.toggle('open');
+
+      link.parentElement.classList.toggle("open");
     });
   });
 
-  document.addEventListener('click', (e) => {
+  document.addEventListener("click", (e) => {
     if (!isTouch) return;
-    const open = document.querySelector('nav .dropdown.open');
-    if (open && !open.contains(e.target)) open.classList.remove('open');
+
+    const open = document.querySelector("nav .dropdown.open");
+
+    if (open && !open.contains(e.target)) {
+      open.classList.remove("open");
+    }
   });
 
-  document.addEventListener('keydown', (e) => {
-    if (e.key === 'Escape')
-      document.querySelectorAll('nav .dropdown.open').forEach(d => d.classList.remove('open'));
+  document.addEventListener("keydown", (e) => {
+    if (e.key === "Escape") {
+      document.querySelectorAll("nav .dropdown.open").forEach((d) => {
+        d.classList.remove("open");
+      });
+    }
   });
 })();
 
@@ -32,30 +42,24 @@ const modal = document.getElementById("newsletterModal");
 const closeBtn = document.getElementById("closeNewsletter");
 const form = document.getElementById("newsletterForm");
 
-// Open modal
-openBtn.addEventListener("click", () => {
-  modal.style.display = "flex";
-});
+if (openBtn && modal && closeBtn && form) {
+  openBtn.addEventListener("click", () => {
+    modal.style.display = "flex";
+  });
 
-// Close modal
-closeBtn.addEventListener("click", () => {
-  modal.style.display = "none";
-});
-window.addEventListener("click", (e) => {
-  if (e.target === modal) modal.style.display = "none";
-});
+  closeBtn.addEventListener("click", () => {
+    modal.style.display = "none";
+  });
 
-// Handle form
-form.addEventListener("submit", (e) => {
-  e.preventDefault();
-  alert("💌 Thanks for subscribing!");
-  modal.style.display = "none";
-});
+  window.addEventListener("click", (e) => {
+    if (e.target === modal) {
+      modal.style.display = "none";
+    }
+  });
 
-document.body.addEventListener("pointermove", (e)=>{
-  const { currentTarget: el, clientX: x, clientY: y } = e;
-  const { top: t, left: l, width: w, height: h } = el.getBoundingClientRect();
-  el.style.setProperty('--posX',  x-l-w/2);
-  el.style.setProperty('--posY',  y-t-h/2);
-})
-
+  form.addEventListener("submit", (e) => {
+    e.preventDefault();
+    alert("💌 Thanks for subscribing!");
+    modal.style.display = "none";
+  });
+}
