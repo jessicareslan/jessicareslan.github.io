@@ -61,6 +61,7 @@ class Stage {
     this.camera.top = 1;
     this.camera.bottom = -1;
     this.camera.updateProjectionMatrix();
+  );
   }
 
   render() {
@@ -130,8 +131,8 @@ class WaveMesh {
     if (!canvas) return;
 
     this.uniforms.resolution.value.set(
-      canvas.clientWidth,
-      canvas.clientHeight
+      canvas.width,
+      canvas.height
     );
   }
 
