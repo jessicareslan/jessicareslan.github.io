@@ -101,7 +101,7 @@ footer,
   flex-direction: column;
   justify-content: flex-start;
 
-  padding: 0px 40px 54px;
+  padding: 0px 0px 4px;
 
   overflow: hidden;
 }
