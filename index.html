@@ -1,178 +1,159 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
   <title>Funky Earth</title>
-  <meta name="description" content="Photography, video, poetry, and opinions." />
+  <meta name="description" content="A digital zine for earth, food, photography, poetry, and opinions." />
 
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-
-  <link href="https://fonts.googleapis.com/css2?family=Bitcount+Grid+Double:wght@100..900&family=Emilys+Candy&display=swap" rel="stylesheet">
-
-  <link rel="stylesheet" href="assets/style.css">
+  <link rel="stylesheet" href="assets/style.css?v=1" />
 </head>
 
-<body class="site">
+<body>
+  <div class="grain" aria-hidden="true"></div>
+  <div class="glow" aria-hidden="true"></div>
 
-  <!-- Animated Background -->
-  <div id="vanta-bg"></div>
+  <header class="site-header">
+    <a href="/" class="logo">Funky Earth</a>
 
-  <header>
-    <a href="./" class="logo">
-      <span class="logo-text">Funky Earth</span>
-    </a>
-
-    <nav>
-      <div class="dropdown">
-        <a href="#articles">Unearth ▾</a>
-
-        <div class="dropdown-content">
-          <a href="#environment">Environment</a>
-          <a href="#recipes">Food</a>
-          <a href="#photography">Photography</a>
-          <a href="#poetry">Poetry</a>
-          <a href="#opinions">Opinions</a>
-        </div>
-
-      </div>
-
-      <a href="#submissions">Submissions</a>
+    <nav class="nav" aria-label="Primary navigation">
+      <a href="#environment">Environment</a>
+      <a href="#food">Food</a>
+      <a href="#photography">Photography</a>
+      <a href="#poetry">Poetry</a>
       <a href="#about">About</a>
-
     </nav>
   </header>
 
-  <section class="hero-banner">
+  <main>
+    <section class="hero" id="top">
+      <p class="eyebrow">digital earth journal / los angeles</p>
 
-    <div class="overlay">
+      <h1>
+        FUNKY
+        <span>EARTH</span>
+      </h1>
 
-      <div class="latest-circle-wrap top-left">
+      <p class="intro">
+        Environmental essays, food notes, photography, poetry, and strange little opinions.
+      </p>
 
-        <div class="latest-circle">
+      <a href="#index" class="scroll-link">Unearth ↓</a>
+    </section>
 
-          <svg viewBox="0 0 200 200" width="160" height="160">
-
-            <defs>
-
-              <path
-                id="latest-circle-path"
-                d="M100,100 m-75,0 a75,75 0 1,1 150,0 a75,75 0 1,1 -150,0" />
-
-            </defs>
-
-            <text class="ring-text" letter-spacing="3">
-
-              <textPath href="#latest-circle-path">
-
-                JOIN WEEKLY NEWSLETTER
-
-              </textPath>
-
-            </text>
-
-          </svg>
-
-        </div>
-
-        <button class="mail-btn" id="openNewsletter">
-          <img src="assets/images/mail.png" alt="Join Newsletter">
-        </button>
-
+    <section class="marquee" aria-label="Funky Earth themes">
+      <div>
+        water / soil / plastic / taste / image / poem / field notes / strange opinions /
+        water / soil / plastic / taste / image / poem / field notes / strange opinions /
       </div>
+    </section>
 
-      <div class="newsletter-modal" id="newsletterModal">
+    <section class="index-list" id="index">
+      <a href="#environment">
+        <span>001</span>
+        <strong>Environment</strong>
+        <em>PFAS, microplastics, water, climate, contamination, repair.</em>
+      </a>
 
-        <div class="modal-content">
+      <a href="#food">
+        <span>002</span>
+        <strong>Food</strong>
+        <em>Recipes, groceries, restaurants, cravings, and edible moods.</em>
+      </a>
 
-          <span class="close-btn" id="closeNewsletter">&times;</span>
+      <a href="#photography">
+        <span>003</span>
+        <strong>Photography</strong>
+        <em>Visual diaries, field textures, city fragments, and light.</em>
+      </a>
 
-          <form id="newsletterForm">
+      <a href="#poetry">
+        <span>004</span>
+        <strong>Poetry</strong>
+        <em>Soft observations, weird feelings, tiny disasters.</em>
+      </a>
 
-            <input
-              type="email"
-              placeholder="Your email address"
-              required>
+      <a href="#opinions">
+        <span>005</span>
+        <strong>Opinions</strong>
+        <em>Notes, rants, taste, culture, and whatever will not leave my head.</em>
+      </a>
 
-            <button type="submit">
+      <a href="#submissions">
+        <span>006</span>
+        <strong>Submissions</strong>
+        <em>Send work, ideas, photos, poems, recipes, and field notes.</em>
+      </a>
+    </section>
 
-              Subscribe
+    <section class="feature-grid">
+      <article class="feature-card" id="environment">
+        <p>Environment</p>
+        <h2>What is hiding in the water?</h2>
+        <a href="#">Coming soon</a>
+      </article>
 
-            </button>
+      <article class="feature-card" id="food">
+        <p>Food</p>
+        <h2>Things worth eating slowly.</h2>
+        <a href="#">Coming soon</a>
+      </article>
 
-          </form>
+      <article class="feature-card" id="photography">
+        <p>Photography</p>
+        <h2>Pictures from the edge of the day.</h2>
+        <a href="#">Coming soon</a>
+      </article>
 
-        </div>
+      <article class="feature-card" id="poetry">
+        <p>Poetry</p>
+        <h2>Little poems for strange weather.</h2>
+        <a href="#">Coming soon</a>
+      </article>
+    </section>
 
+    <section class="newsletter" id="submissions">
+      <button class="stamp" id="openNewsletter" aria-label="Open newsletter signup">
+        <span>JOIN WEEKLY NEWSLETTER</span>
+      </button>
+
+      <div>
+        <p class="eyebrow">newsletter / submissions</p>
+        <h2>Send something earthy, weird, pretty, or true.</h2>
+        <p>
+          Funky Earth is becoming a small digital magazine. Subscribe for new posts,
+          experiments, photos, and dispatches.
+        </p>
       </div>
+    </section>
 
-    </div>
-
-  </section>
-
-  <main class="wrap" id="articles">
-
+    <section class="about" id="about">
+      <p>
+        Funky Earth is a digital zine for curious people who like nature, taste,
+        images, science, softness, and chaos.
+      </p>
+    </section>
   </main>
 
   <footer>
-
-    <div class="wrap foot">
-
-      <div class="brand">
-
-        <span class="logo-text">
-
-          Funky Earth
-
-        </span>
-
-        <p class="tagline">
-
-          love and passion
-
-        </p>
-
-      </div>
-
-    </div>
-
+    <p>© Funky Earth</p>
+    <a href="#top">Back to top ↑</a>
   </footer>
 
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r134/three.min.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/vanta@latest/dist/vanta.halo.min.js"></script>
+  <div class="newsletter-modal" id="newsletterModal" aria-hidden="true">
+    <div class="modal-card">
+      <button class="close-btn" id="closeNewsletter" aria-label="Close newsletter">&times;</button>
+      <h2>Join Funky Earth</h2>
+      <p>Weekly-ish notes on earth, food, photos, poems, and opinions.</p>
 
-  <script>
+      <form id="newsletterForm">
+        <input type="email" placeholder="Your email address" required />
+        <button type="submit">Subscribe</button>
+      </form>
+    </div>
+  </div>
 
-    VANTA.HALO({
-
-      el: "#vanta-bg",
-
-      mouseControls: true,
-
-      touchControls: true,
-
-      gyroControls: false,
-
-      minHeight: 200,
-
-      minWidth: 200,
-
-      baseColor: 0x000000,
-
-      backgroundColor: 0xffffff,
-
-      amplitudeFactor: 2,
-
-      size: 1.1
-
-    });
-
-  </script>
-
-  <script src="assets/script.js"></script>
-
+  <script src="assets/script.js?v=1"></script>
 </body>
-
 </html>
