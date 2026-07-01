@@ -1,65 +1,51 @@
-// Tap-to-open dropdown on touch devices
-(() => {
-  const isTouch = window.matchMedia("(hover: none)").matches;
-  const links = document.querySelectorAll("nav .dropdown > a");
+const glow = document.querySelector(".glow");
 
-  links.forEach((link) => {
-    link.addEventListener("click", (e) => {
-      if (!isTouch) return;
+window.addEventListener("pointermove", (event) => {
+  if (!glow) return;
 
-      e.preventDefault();
-
-      document.querySelectorAll("nav .dropdown.open").forEach((d) => {
-        if (d !== link.parentElement) d.classList.remove("open");
-      });
-
-      link.parentElement.classList.toggle("open");
-    });
-  });
-
-  document.addEventListener("click", (e) => {
-    if (!isTouch) return;
-
-    const open = document.querySelector("nav .dropdown.open");
-
-    if (open && !open.contains(e.target)) {
-      open.classList.remove("open");
+  glow.animate(
+    {
+      left: `${event.clientX}px`,
+      top: `${event.clientY}px`
+    },
+    {
+      duration: 450,
+      fill: "forwards"
     }
+  );
+});
+
+const openNewsletter = document.getElementById("openNewsletter");
+const closeNewsletter = document.getElementById("closeNewsletter");
+const newsletterModal = document.getElementById("newsletterModal");
+const newsletterForm = document.getElementById("newsletterForm");
+
+function openModal() {
+  newsletterModal.classList.add("is-open");
+  newsletterModal.setAttribute("aria-hidden", "false");
+}
+
+function closeModal() {
+  newsletterModal.classList.remove("is-open");
+  newsletterModal.setAttribute("aria-hidden", "true");
+}
+
+if (openNewsletter && closeNewsletter && newsletterModal && newsletterForm) {
+  openNewsletter.addEventListener("click", openModal);
+  closeNewsletter.addEventListener("click", closeModal);
+
+  newsletterModal.addEventListener("click", (event) => {
+    if (event.target === newsletterModal) closeModal();
   });
 
-  document.addEventListener("keydown", (e) => {
-    if (e.key === "Escape") {
-      document.querySelectorAll("nav .dropdown.open").forEach((d) => {
-        d.classList.remove("open");
-      });
-    }
-  });
-})();
-
-// Newsletter popup logic
-const openBtn = document.getElementById("openNewsletter");
-const modal = document.getElementById("newsletterModal");
-const closeBtn = document.getElementById("closeNewsletter");
-const form = document.getElementById("newsletterForm");
-
-if (openBtn && modal && closeBtn && form) {
-  openBtn.addEventListener("click", () => {
-    modal.style.display = "flex";
+  document.addEventListener("keydown", (event) => {
+    if (event.key === "Escape") closeModal();
   });
 
-  closeBtn.addEventListener("click", () => {
-    modal.style.display = "none";
-  });
-
-  window.addEventListener("click", (e) => {
-    if (e.target === modal) {
-      modal.style.display = "none";
-    }
-  });
-
-  form.addEventListener("submit", (e) => {
-    e.preventDefault();
+  newsletterForm.addEventListener("submit", (event) => {
+    event.preventDefault();
     alert("💌 Thanks for subscribing!");
-    modal.style.display = "none";
+    closeModal();
+    newsletterForm.reset();
   });
 }
