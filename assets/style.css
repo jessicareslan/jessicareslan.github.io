@@ -94,11 +94,6 @@ footer,
 
 .hero {
   position: relative;
-  min-height: calc(100vh - 72px);
-  padding: 42px 24px 54px;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
   overflow: hidden;
 }
 .hero h1,
