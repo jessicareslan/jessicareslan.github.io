@@ -61,7 +61,6 @@ class Stage {
     this.camera.top = 1;
     this.camera.bottom = -1;
     this.camera.updateProjectionMatrix();
-  );
   }
 
   render() {
