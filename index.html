@@ -49,17 +49,8 @@ uniform float xScale;
 uniform float yScale;
 uniform float distortion;
 
-    <script id="js-fragment-shader" type="x-shader/x-fragment">
-    precision highp float;
-
-    uniform vec2 resolution;
-    uniform float time;
-    uniform float xScale;
-    uniform float yScale;
-    uniform float distortion;
-
-    void main() {
-      vec2 p = (gl_FragCoord.xy * 2.0 - resolution)
+  void main() {
+    vec2 p = (gl_FragCoord.xy * 2.0 - resolution)
              / min(resolution.x, resolution.y);
 
     float d = length(p) * distortion;
