@@ -52,7 +52,7 @@ uniform float distortion;
   void main() {
     vec2 p = (gl_FragCoord.xy * 2.0 - resolution)
              / min(resolution.x, resolution.y);
-    p.y -= 5;
+    p.y -= 1;
 
     float d = length(p) * distortion;
 
