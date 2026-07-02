@@ -22,6 +22,18 @@ body {
   overflow-x: hidden;
 }
 
+body,
+.site-header,
+main,
+footer,
+.hero,
+.index-list,
+.feature-grid,
+.newsletter,
+.about {
+  color: var(--paper);
+}
+
 a {
   color: inherit;
   text-decoration: none;
