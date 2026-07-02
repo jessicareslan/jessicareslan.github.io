@@ -54,7 +54,7 @@ uniform float distortion;
              / min(resolution.x, resolution.y);
     p.y += 0.5;
 
-    float d = 0.0;
+    float d = length(p) * distortion;
 
     float rx = p.x * (1.0 + d);
     float gx = p.x;
