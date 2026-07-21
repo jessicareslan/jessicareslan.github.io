@@ -73,8 +73,13 @@ uniform float distortion;
     float b = 0.05 / abs(
         p.y + sin((bx + time) * xScale) * yScale
     );
+  
+    vec3 orange = vec3(1.0, 0.28, 0.08);
+    vec3 purple = vec3(0.62, 0.25, 0.78);
+    vec3 teal   = vec3(0.10, 0.85, 0.80);
 
-    vec3 color = vec3(r, g, b);
+    vec3 color = orange * r + purple * g + teal * b;
+  
     float alpha = max(max(r, g), b);
 
     alpha = smoothstep(0.02, 0.35, alpha);
