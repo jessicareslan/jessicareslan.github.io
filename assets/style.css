@@ -64,7 +64,7 @@ a {
   width: 420px;
   height: 420px;
   border-radius: 50%;
-  background: radial-gradient(circle, rgba(255, 120, 180, 0.25), transparent 65%);
+  background: radial-gradient(circle, rgba(180, 80, 255, 0.35), transparent 65%);
   transform: translate(-50%, -50%);
   filter: blur(24px);
 }
