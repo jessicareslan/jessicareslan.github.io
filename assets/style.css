@@ -152,8 +152,10 @@ footer,
 .intro {
   max-width: 690px;
   margin: 34px 0 0;
-  font-size: clamp(20px, 3vw, 38px);
-  line-height: 1.08;
+  font-family: Georgia, serif;
+  font-style: italic;
+  font-size: clamp(24px, 4vw, 52px);
+  line-height: 1.05;
 }
 
 #webgl-canvas {
