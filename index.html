@@ -78,11 +78,11 @@ uniform float distortion;
     g = clamp(g, 0.0, 1.0);
     b = clamp(b, 0.0, 1.0);
   
-    vec3 sunflower = vec3(0.86, 0.72, 0.05);
-    vec3 greenTea  = vec3(0.16, 0.36, 0.18);
-    vec3 medBlue   = vec3(0.08, 0.70, 0.82);
+  vec3 cobalt  = vec3(0.03, 0.18, 0.70);
+  vec3 jasmine = vec3(0.78, 0.28, 0.72);
+  vec3 soca    = vec3(0.78, 0.10, 0.04);
 
-    vec3 color = sunflower * r + greenTea * g + medBlue * b;
+  vec3 color = cobalt * r + jasmine * g + soca * b;
   
     float alpha = max(max(r, g), b);
 
